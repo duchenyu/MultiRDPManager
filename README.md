@@ -5,7 +5,7 @@
   <p>
     <img src="https://img.shields.io/badge/.NET-8.0-512BD4?style=flat-square&logo=dotnet" alt=".NET 8">
     <img src="https://img.shields.io/badge/platform-Windows%20x64-0078D6?style=flat-square&logo=windows" alt="Windows x64">
-    <img src="https://img.shields.io/badge/license-CC_BY--NC--SA_4.0-orange?style=flat-square" alt="MIT License">
+    <img src="https://img.shields.io/badge/license-CC_BY--NC--SA_4.0-orange?style=flat-square" alt="CC BY-NC-SA 4.0">
     <img src="https://img.shields.io/github/v/release/duchenyu/MultiRDPManager?style=flat-square" alt="Latest Release">
   </p>
 
