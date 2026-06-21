@@ -133,9 +133,6 @@ Server2,192.168.1.101,administrator,password456
 
 所有版本均可在 [Releases 页面](https://github.com/duchenyu/MultiRDPManager/releases) 下载。
 
-## 📄 许可证 / License
-
-[MIT](LICENSE)
 
 ---
 
