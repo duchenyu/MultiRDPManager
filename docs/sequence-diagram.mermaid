@@ -1,0 +1,119 @@
+%% ── 图1: 连接流程 ──
+
+sequenceDiagram
+    participant User as 用户
+    participant UI as MainWindow.xaml
+    participant Mgr as RdpConnectionManager
+    participant Sess as RdpSession
+    participant Native as FreeRdpNative
+    participant Wrap as MRdpWrapper.dll
+    participant FRDP as FreeRDP.dll
+
+    User->>UI: 输入服务器信息，点击"连接"
+    UI->>Mgr: CreateSession(serverEntry)
+    Mgr->>Mgr: 创建 RdpSession 实例
+    Mgr-->>UI: 返回 sessionId
+
+    UI->>Sess: ConnectAsync(serverEntry)
+    Sess->>Native: MRDP_CreateSession()
+    Native->>Wrap: MRDP_CreateSession()
+    Wrap->>FRDP: freerdp_new()
+    FRDP-->>Wrap: 返回 freerdp* instance
+    Wrap-->>Native: 返回 sessionId
+    Native-->>Sess: sessionHandle
+
+    Sess->>Native: MRDP_SetServerInfo()
+    Native->>Wrap: MRDP_SetServerInfo()
+    Wrap->>FRDP: freerdp_settings_set_xxx()
+
+    Sess->>Native: MRDP_SetCredentials()
+    Native->>Wrap: MRDP_SetCredentials()
+    Wrap->>FRDP: freerdp_settings_set_string(FreeRDP_Username...)
+
+    Note over Sess: 创建工作线程
+    Sess->>Sess: 启动 WorkerThread
+
+    rect rgb(200, 220, 240)
+        Note over Sess,FRDP: ── 工作线程内部 ──
+        Sess->>Native: MRDP_Connect(sessionId)
+        Native->>Wrap: MRDP_Connect()
+        Wrap->>FRDP: freerdp_connect(instance)
+        FRDP-->>Wrap: 连接成功
+        Wrap->>FRDP: gdi_init(instance, colorDepth)
+        FRDP-->>Wrap: GDI 初始化完成
+        Wrap-->>Native: MRDP_OK
+        Native-->>Sess: 成功
+
+        Sess->>Sess: RaiseStateChanged(Connected)
+        Sess-->>UI: [事件] StateChanged → Connected
+        UI->>UI: 更新 UI 状态指示
+
+        loop 事件循环
+            Sess->>Native: MRDP_PollEvent()
+            Native->>Wrap: MRDP_PollEvent()
+            Wrap->>FRDP: freerdp_check_event_handles()
+            FRDP-->>Wrap: 图形更新触发
+
+            alt 帧更新事件
+                Wrap->>FRDP: GDI 渲染到内部 buffer
+                Wrap-->>Native: MRDP_EVENT_FRAME_UPDATED
+                Native-->>Sess: 帧更新通知
+                Sess->>Native: MRDP_GetFrameBuffer()
+                Native->>Wrap: MRDP_GetFrameBuffer()
+                Wrap-->>Native: buffer, width, height, stride
+                Native-->>Sess: 帧数据指针
+                Sess->>Sess: UpdateFrameBuffer()
+                Note over Sess: CopyPixels → WriteableBitmap
+                Sess-->>UI: [事件] FrameUpdated
+                UI->>UI: 刷新 RdpCanvas 显示
+            else 断开事件
+                Wrap-->>Native: MRDP_EVENT_DISCONNECTED
+                Native-->>Sess: 断开通知
+                Sess->>Sess: RaiseStateChanged(Disconnected)
+            end
+        end
+    end
+
+
+%% ── 图2: 群控输入注入流程 ──
+
+sequenceDiagram
+    participant User as 用户
+    participant UI as RdpCanvas (主控)
+    participant BCast as InputBroadcastService
+    participant Mgr as RdpConnectionManager
+    participant Sess1 as RdpSession[Server01]
+    participant Sess2 as RdpSession[Server02]
+    participant Sess3 as RdpSession[Server03]
+
+    Note over BCast: 群控模式 = All
+
+    User->>UI: 在主控窗口移动鼠标到 (400, 300)
+    UI->>UI: 记录鼠标在本地显示区域的位置
+
+    User->>UI: 点击鼠标左键
+    UI->>BCast: RouteMouseEvent(displayX, displayY, eventData)
+
+    par 群控模式
+        BCast->>BCast: 获取所有已连接会话
+        BCast->>BCast: 归一化坐标: x_norm = (int)(400 / localW * 65535)
+
+        BCast->>Mgr: BroadcastMouseEvent(flags, normX, normY)
+
+        Mgr->>Sess1: SendMouseEvent(flags, normX, normY)
+        Mgr->>Sess2: SendMouseEvent(flags, normX, normY)
+        Mgr->>Sess3: SendMouseEvent(flags, normX, normY)
+
+        Note over Sess1,Sess3: 并行发送到所有从机
+
+        Sess1->>Sess1: Native MRDP_SendMouseEvent()
+        Note over Sess1: freerdp_input_send_mouse_event()
+        Note over Sess1: 直接在 RDP 协议层注入 PDU
+        Note over Sess1: 系统光标不动！
+
+        Sess2->>Sess2: Native MRDP_SendMouseEvent()
+        Sess3->>Sess3: Native MRDP_SendMouseEvent()
+    end
+
+    Note over Sess1,Sess3: 所有从机远程桌面收到点击
+    UI-->>User: 本地光标位置无变化，无弹跳！

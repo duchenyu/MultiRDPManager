@@ -1,0 +1,443 @@
+﻿<Window x:Class="MultiRDPManager.FreeRDP.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:MultiRDPManager.FreeRDP.ViewModels"
+        xmlns:converters="clr-namespace:MultiRDPManager.FreeRDP.Converters"
+        xmlns:wf="clr-namespace:System.Windows.Forms.Integration;assembly=WindowsFormsIntegration"
+        mc:Ignorable="d"
+        Title="多Windows服务器远程管理器 - MultiRDPManager"
+        Width="1600" Height="900"
+        MinWidth="1024" MinHeight="600"
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource Brush_Background}"
+        Foreground="{StaticResource Brush_TextPrimary}">
+
+    <Window.Resources>
+        <converters:BoolToColorConverter x:Key="BoolToColorConverter" />
+        <converters:ConnectionStatusToIconConverter x:Key="ConnectionStatusToIconConverter" />
+        <converters:GroupControlBorderConverter x:Key="GroupControlBorderConverter" />
+        <converters:ConnectionStatusToColorConverter x:Key="ConnectionStatusToColorConverter" />
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <!-- 行0: 菜单栏 (32px) -->
+            <RowDefinition Height="32" />
+            <!-- 行1: 工具栏 (40px) -->
+            <RowDefinition Height="40" />
+            <!-- 行2: 主体区 (*) -->
+            <RowDefinition Height="*" />
+            <!-- 行3: 状态栏 (30px) -->
+            <RowDefinition Height="30" />
+        </Grid.RowDefinitions>
+
+        <!-- ========== 行0: 菜单栏 ========== -->
+        <Menu Grid.Row="0" Background="{StaticResource Brush_ToolbarBackground}" Foreground="{StaticResource Brush_TextPrimary}">
+            <MenuItem Header="文件(_F)">
+                <MenuItem Header="新建连接" Command="{Binding AddServerCommand}" />
+                <MenuItem Header="批量导入" Command="{Binding ImportCsvCommand}" />
+                <Separator />
+                <MenuItem Header="退出(_X)" InputGestureText="Alt+F4" Click="OnExitClick" />
+            </MenuItem>
+            <MenuItem Header="操作(_O)">
+                <MenuItem Header="连接选中" Command="{Binding ConnectCommand}" />
+                <MenuItem Header="断开选中" Command="{Binding DisconnectCommand}" />
+                <Separator />
+                <MenuItem Header="全部连接" Command="{Binding ConnectAllCommand}" />
+                <MenuItem Header="全部断开" Command="{Binding DisconnectAllCommand}" />
+                <Separator />
+                <MenuItem Header="群控模式" Command="{Binding ToggleGroupControlCommand}"
+                          IsCheckable="True" IsChecked="{Binding IsGroupControlActive}" />
+            </MenuItem>
+            <MenuItem Header="帮助(_H)">
+                <MenuItem Header="关于" Click="OnAboutClick" />
+            </MenuItem>
+        </Menu>
+
+        <!-- ========== 行1: 工具栏 ========== -->
+        <ToolBar Grid.Row="1" Background="{StaticResource Brush_ToolbarBackground}"
+                 Band="0" BandIndex="0"
+                 Style="{x:Null}"
+                 BorderThickness="0,0,0,1"
+                 BorderBrush="{StaticResource Brush_Divider}">
+            <StackPanel Orientation="Horizontal" Margin="4,0">
+                <!-- 新建连接 -->
+                <Button Style="{StaticResource ToolbarButtonStyle}"
+                        Command="{Binding AddServerCommand}"
+                        ToolTip="新建连接"
+                        Content="新建连接" />
+
+                <!-- 批量导入 -->
+                <Button Style="{StaticResource ToolbarButtonStyle}"
+                        Command="{Binding ImportCsvCommand}"
+                        ToolTip="批量导入 -- 粘贴CSV文本（IP,用户名,密码）"
+                        Content="批量导入" />
+
+                <!-- 连接选中 -->
+                <Button Style="{StaticResource ToolbarButtonStyle}"
+                        Command="{Binding ConnectCommand}"
+                        ToolTip="连接选中的服务器"
+                        Content="连接" />
+
+                <!-- 断开选中 -->
+                <Button Style="{StaticResource ToolbarButtonStyle}"
+                        Command="{Binding DisconnectCommand}"
+                        ToolTip="断开选中的服务器"
+                        Content="断开" />
+
+                <!-- 全部连接 -->
+                <Button Style="{StaticResource ToolbarButtonStyle}"
+                        Command="{Binding ConnectAllCommand}"
+                        ToolTip="连接所有服务器"
+                        Content="全连" />
+
+                <!-- 全部断开 -->
+                <Button Style="{StaticResource ToolbarButtonStyle}"
+                        Command="{Binding DisconnectAllCommand}"
+                        ToolTip="断开所有服务器"
+                        Content="全断" />
+
+                <!-- 删除 -->
+                <Button Style="{StaticResource ToolbarButtonStyle}"
+                        Command="{Binding DeleteServerCommand}"
+                        ToolTip="删除选中的服务器"
+                        Content="删除" />
+
+                <!-- 群控切换按钮 -->
+                <Button Style="{StaticResource ToolbarButtonStyle}"
+                        Command="{Binding ToggleGroupControlCommand}"
+                        ToolTip="切换群控模式"
+                        Content="群控" />
+            </StackPanel>
+        </ToolBar>
+
+        <!-- ========== 行2: 主体区 (三栏布局) ========== -->
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <!-- 列0: 左侧服务器列表 -->
+                <ColumnDefinition Width="220" MinWidth="180" />
+                <!-- 列1: GridSplitter -->
+                <ColumnDefinition Width="4" />
+                <!-- 列2: 中间主预览区 -->
+                <ColumnDefinition Width="*" />
+                <!-- 列3: GridSplitter -->
+                <ColumnDefinition Width="4" />
+                <!-- 列4: 右侧缩略面板 -->
+                <ColumnDefinition Width="280" MinWidth="200" />
+            </Grid.ColumnDefinitions>
+
+            <!-- ===== 列0: 服务器列表 ===== -->
+            <Border Grid.Column="0" Background="{StaticResource Brush_Background}"
+                    BorderBrush="{StaticResource Brush_Divider}" BorderThickness="0,0,1,0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <!-- 服务器列表标题 -->
+                    <Border Grid.Row="0" Background="{StaticResource Brush_ToolbarBackground}"
+                            Padding="8,6">
+                        <TextBlock Text="服务器列表" FontWeight="Bold"
+                                   Foreground="{StaticResource Brush_TextPrimary}" />
+                    </Border>
+
+                    <!-- 服务器列表 -->
+                    <ListView Grid.Row="1" x:Name="ServerListView"
+                              ItemsSource="{Binding Servers}"
+                              SelectedItem="{Binding SelectedServer}"
+                              SelectionMode="Extended"
+                              VirtualizingPanel.ScrollUnit="Item">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Border Padding="6,4" Background="Transparent">
+                                    <StackPanel Orientation="Horizontal">
+                                        <!-- 连接状态图标 -->
+                                        <TextBlock Text="{Binding ConnectionStatus, Converter={StaticResource ConnectionStatusToIconConverter}}"
+                                                   FontSize="14"
+                                                   VerticalAlignment="Center" Margin="0,0,6,0" />
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding Name}" FontWeight="SemiBold" FontSize="13" />
+                                            <TextBlock Text="{Binding IpAddress}" FontSize="11"
+                                                       Foreground="{StaticResource Brush_TextSecondary}" />
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+            </Border>
+
+            <!-- ===== 列1: GridSplitter ===== -->
+            <GridSplitter Grid.Column="1" Width="4"
+                          Background="{StaticResource Brush_Divider}"
+                          HorizontalAlignment="Stretch"
+                          ShowsPreview="True" />
+
+            <!-- ===== 列2: 中间主预览区 ===== -->
+            <Border Grid.Column="2"
+                    BorderBrush="{Binding IsGroupControlActive, Converter={StaticResource GroupControlBorderConverter}}"
+                    BorderThickness="2"
+                    Background="#1a1d24">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <!-- 预览区标题 -->
+                    <Border Grid.Row="0" Background="{StaticResource Brush_ToolbarBackground}" Padding="8,4">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock x:Name="MainPreviewTitle" Text="远程桌面预览 — 请选择会话" FontWeight="Bold" />
+                            <!-- 群控指示器 -->
+                            <Border x:Name="GroupControlIndicator"
+                                    Background="{StaticResource Brush_GroupControlBorder}"
+                                    CornerRadius="4" Padding="6,1" Margin="10,0,0,0">
+                                <Border.Style>
+                                    <Style TargetType="Border">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsGroupControlActive}" Value="True">
+                                                <Setter Property="Visibility" Value="Visible" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                                <TextBlock Text="群控模式" FontSize="11" FontWeight="Bold"
+                                           Foreground="White" />
+                            </Border>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- 主RDP显示区：自适应缩放（SmartSizing） -->
+                    <Grid Grid.Row="1">
+                        <!-- 占位提示 -->
+                        <TextBlock x:Name="PlaceholderText"
+                                   Text="选择服务器并点击连接开始远程桌面会话"
+                                   Foreground="#555"
+                                   FontSize="18"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   IsHitTestVisible="False" />
+
+                        <!-- WindowsFormsHost自适应填充中间区域，RDP画面缩放显示 -->
+                        <Grid x:Name="MainPreviewContent" />
+                    </Grid>
+                </Grid>
+            </Border>
+
+            <!-- ===== 列3: GridSplitter ===== -->
+            <GridSplitter Grid.Column="3" Width="4"
+                          Background="{StaticResource Brush_Divider}"
+                          HorizontalAlignment="Stretch"
+                          ShowsPreview="True" />
+
+            <!-- ===== 列4: 右侧缩略面板 ===== -->
+            <Border Grid.Column="4" Background="{StaticResource Brush_Background}"
+                    BorderBrush="{StaticResource Brush_Divider}" BorderThickness="1,0,0,0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <!-- 缩略面板标题 + 搜索 + 全选 -->
+                    <Border Grid.Row="0" Background="{StaticResource Brush_ToolbarBackground}"
+                            Padding="8,6" BorderThickness="0,0,0,1" BorderBrush="{StaticResource Brush_Divider}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <!-- 第一行：标题 + 全选勾选框 -->
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="已连接服务器" FontWeight="Bold"
+                                           VerticalAlignment="Center" />
+                                <CheckBox Grid.Column="1" x:Name="SelectAllCheckBox"
+                                          Content="全选"
+                                          FontSize="11"
+                                          VerticalAlignment="Center"
+                                          Foreground="{StaticResource Brush_TextPrimary}"
+                                          Checked="OnSelectAllChecked"
+                                          Unchecked="OnSelectAllUnchecked" />
+                            </Grid>
+                            <!-- 第二行：搜索框 -->
+                            <TextBox Grid.Row="1" x:Name="SearchTextBox"
+                                     Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                                     FontSize="12" Margin="0,5,0,0" Padding="4,2"
+                                     Background="#181825"
+                                     Foreground="#cdd6f4"
+                                     BorderBrush="{StaticResource Brush_Divider}"
+                                     BorderThickness="1"
+                                     CaretBrush="#cdd6f4">
+                                <TextBox.Style>
+                                    <Style TargetType="TextBox">
+                                        <Setter Property="Text" Value="" />
+                                        <Style.Triggers>
+                                            <Trigger Property="Text" Value="">
+                                                <Setter Property="Opacity" Value="0.5" />
+                                            </Trigger>
+                                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                                <Setter Property="Opacity" Value="1" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBox.Style>
+                            </TextBox>
+                        </Grid>
+                    </Border>
+
+                    <!-- 会话卡片列表 (ItemsControl) -->
+                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto"
+                                  Background="{StaticResource Brush_Background}">
+                        <ItemsControl x:Name="ThumbnailPanelItems"
+                                      ItemsSource="{Binding ActiveSessions}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Background="{StaticResource Brush_CardBackground}"
+                                            CornerRadius="6" Margin="6,4" Padding="8"
+                                            BorderThickness="1"
+                                            Cursor="Hand"
+                                            MouseDown="OnThumbnailCardClick">
+                                        <Border.Style>
+                                            <Style TargetType="Border">
+                                                <Setter Property="BorderBrush" Value="{StaticResource Brush_Divider}" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsMaster}" Value="True">
+                                                        <Setter Property="BorderBrush" Value="{StaticResource Brush_Online}" />
+                                                        <Setter Property="BorderThickness" Value="2" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Border.Style>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />  <!-- 标题栏 -->
+                                                <RowDefinition Height="*" />      <!-- 缩略图 -->
+                                                <RowDefinition Height="Auto" />   <!-- 状态信息 -->
+                                            </Grid.RowDefinitions>
+
+                                            <!-- 行0: 标题栏（状态灯+主从标记+服务器名） -->
+                                            <Grid Grid.Row="0" Margin="0,0,0,4">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <Ellipse Grid.Column="0" Width="10" Height="10" Margin="0,2,6,2"
+                                                         Fill="{Binding Status, Converter={StaticResource ConnectionStatusToColorConverter}}" />
+                                                <TextBlock Grid.Column="1" FontSize="9" FontWeight="Bold"
+                                                           Foreground="{StaticResource Brush_Online}"
+                                                           Margin="0,0,4,0" VerticalAlignment="Center">
+                                                    <TextBlock.Style>
+                                                        <Style TargetType="TextBlock">
+                                                            <Setter Property="Text" Value="从" />
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding IsMaster}" Value="True">
+                                                                    <Setter Property="Text" Value="主" />
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </TextBlock.Style>
+                                                </TextBlock>
+                                                <TextBlock Grid.Column="2" Text="{Binding ServerName}" FontWeight="Bold"
+                                                           FontSize="12" TextTrimming="CharacterEllipsis" />
+                                            </Grid>
+
+                                            <!-- 行1: 缩略图预览区域 -->
+                                            <Border Grid.Row="1" Background="#1a1d24" CornerRadius="4"
+                                                    Height="135" Margin="0,0,0,4"
+                                                    BorderBrush="{StaticResource Brush_Divider}" BorderThickness="1">
+                                                <Image Source="{Binding ThumbnailSource}"
+                                                       Stretch="Uniform"
+                                                       HorizontalAlignment="Center"
+                                                       VerticalAlignment="Center" />
+                                            </Border>
+
+                                            <!-- 行2: 状态信息 -->
+                                            <Grid Grid.Row="2">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" FontSize="10"
+                                                           Foreground="{StaticResource Brush_TextSecondary}"
+                                                           Text="{Binding Status}" />
+                                                <TextBlock Grid.Column="1" FontSize="10"
+                                                           Foreground="{StaticResource Brush_TextSecondary}"
+                                                           HorizontalAlignment="Right">
+                                                    <Run Text="{Binding RemoteWidth}" />
+                                                    <Run Text="×" />
+                                                    <Run Text="{Binding RemoteHeight}" />
+                                                </TextBlock>
+                                            </Grid>
+                                        <!-- 右上角群控勾选框 -->
+                                        <CheckBox IsChecked="{Binding IsGroupControlSelected}"
+                                                  HorizontalAlignment="Right"
+                                                  VerticalAlignment="Top"
+                                                  Margin="0,2,2,0"
+                                                  ToolTip="勾选以加入群控" />
+                                    </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <!-- ========== 行3: 状态栏 ========== -->
+        <StatusBar Grid.Row="3" Background="{StaticResource Brush_ToolbarBackground}">
+            <StatusBar.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                </ItemsPanelTemplate>
+            </StatusBar.ItemsPanel>
+
+            <!-- 当前服务器 -->
+            <StatusBarItem Grid.Column="0" Padding="8,0">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="服务器: " />
+                    <TextBlock Text="{Binding SelectedServerDisplay, FallbackValue='(未选择)'}" FontWeight="SemiBold" />
+                </StackPanel>
+            </StatusBarItem>
+
+            <!-- 分割 -->
+            <Separator Grid.Column="1" Style="{StaticResource ToolBarSeparatorStyle}"
+                       Margin="4,4" Width="1" Background="{StaticResource Brush_Divider}" />
+
+            <!-- 在线统计 -->
+            <StatusBarItem Grid.Column="2" Padding="8,0">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="在线: " />
+                    <TextBlock Text="{Binding OnlineCount}" FontWeight="Bold"
+                               Foreground="{StaticResource Brush_Online}" />
+                    <TextBlock Text=" / " />
+                    <TextBlock Text="{Binding TotalCount}" />
+                </StackPanel>
+            </StatusBarItem>
+
+            <!-- 群控状态 / 状态文本 -->
+            <StatusBarItem Grid.Column="3" Padding="8,0">
+                <TextBlock Text="{Binding StatusBarText}" />
+            </StatusBarItem>
+        </StatusBar>
+
+        <!-- 隐藏容器已移除 — 改用 off-screen 独立窗口 -->
+    </Grid>
+</Window>

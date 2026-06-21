@@ -1,0 +1,14 @@
+prefix=/mingw64
+exec_prefix=${prefix}
+libdir=/mingw64/lib
+includedir=/mingw64/include
+
+Name: libswscale
+Description: FFmpeg image rescaling library
+Version: 9.5.101
+Requires: 
+Requires.private: libavutil >= 60.26.101
+Conflicts:
+Libs: -L${libdir}  -lswscale 
+Libs.private: -lm -latomic -lshaderc_shared
+Cflags: -I${includedir}

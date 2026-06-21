@@ -1,0 +1,15 @@
+prefix=${pcfiledir}/../..
+exec_prefix=${prefix}
+libdir=${prefix}/lib
+includedir=${prefix}/include/freerdp3/
+libs=-lfreerdp-server-proxy3
+
+Name: FreeRDP proxy
+Description: FreeRDP: A Remote Desktop Protocol Implementation
+URL: http://www.freerdp.com/
+Version: 3.26.0
+Requires: freerdp-server3
+Requires.private: 
+Libs: -L${libdir} ${libs}
+Libs.private: 
+Cflags: -I${includedir}

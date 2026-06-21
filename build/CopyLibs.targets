@@ -1,0 +1,19 @@
+<Project>
+  <!--
+    Copy FreeRDP native DLLs to the output directory.
+    All DLLs from $(MSBuildThisFileDirectory)..\lib\ are copied to $(OutDir).
+  -->
+  <ItemGroup>
+    <NativeLibs Include="$(MSBuildThisFileDirectory)..\lib\*.dll" />
+  </ItemGroup>
+
+  <Target Name="CopyFreeRdpLibs" AfterTargets="AfterBuild" Inputs="@(NativeLibs)" Outputs="@(NativeLibs->'$(OutDir)%(Filename)%(Extension)')">
+    <Copy SourceFiles="@(NativeLibs)" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true" />
+    <Message Text="Copied FreeRDP native DLLs to $(OutDir)" Importance="high" />
+  </Target>
+
+  <Target Name="CopyFreeRdpLibsForPublish" AfterTargets="AfterPublish" Inputs="@(NativeLibs)" Outputs="@(NativeLibs->'$(PublishDir)%(Filename)%(Extension)')">
+    <Copy SourceFiles="@(NativeLibs)" DestinationFolder="$(PublishDir)" SkipUnchangedFiles="true" />
+    <Message Text="Copied FreeRDP native DLLs to $(PublishDir)" Importance="high" />
+  </Target>
+</Project>

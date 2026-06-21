@@ -1,0 +1,117 @@
+<Window x:Class="MultiRDPManager.FreeRDP.Views.Dialogs.ImportCsvDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="批量导入服务器" Height="500" Width="580"
+        WindowStartupLocation="CenterOwner"
+        Background="{StaticResource Brush_Background}"
+        Foreground="{StaticResource Brush_TextPrimary}"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False">
+
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- 标题 -->
+        <TextBlock Grid.Row="0" Text="批量导入服务器" FontSize="16" FontWeight="Bold"
+                   Margin="0,0,0,4" />
+        <TextBlock Grid.Row="1" Text="格式：名称, IP, 用户名, 密码（支持逗号/Tab分隔，端口默认3389）"
+                   FontSize="11" Foreground="{StaticResource Brush_TextSecondary}"
+                   Margin="0,0,0,8" />
+
+        <!-- CSV文本输入区 -->
+        <Border Grid.Row="2" Background="{StaticResource Brush_CardBackground}"
+                CornerRadius="6" BorderBrush="{StaticResource Brush_Divider}" BorderThickness="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <!-- 提示栏 -->
+                <Border Grid.Row="0" Background="{StaticResource Brush_ToolbarBackground}"
+                        Padding="8,4" CornerRadius="6,6,0,0">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="将CSV内容粘贴到下方，" FontSize="11"
+                                   Foreground="{StaticResource Brush_TextSecondary}" />
+                        <TextBlock Text="支持从Excel/文本直接复制" FontSize="11"
+                                   Foreground="{StaticResource Brush_TextSecondary}" />
+                    </StackPanel>
+                </Border>
+
+                <!-- 粘贴文本框 -->
+                <TextBox Grid.Row="1" x:Name="CsvTextBox"
+                         AcceptsReturn="True"
+                         AcceptsTab="True"
+                         TextWrapping="NoWrap"
+                         FontFamily="Consolas"
+                         FontSize="12"
+                         Padding="8"
+                         Background="#1e1e1e"
+                         Foreground="#d4d4d4"
+                         VerticalScrollBarVisibility="Auto"
+                         BorderThickness="0"
+                         TextChanged="OnCsvTextChanged" />
+
+                <!-- 解析结果提示 -->
+                <Border Grid.Row="2" Background="{StaticResource Brush_ToolbarBackground}"
+                        Padding="8,4" CornerRadius="0,0,6,6">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock x:Name="ParseStatusText"
+                                   Text="粘贴CSV数据后自动解析..."
+                                   FontSize="11"
+                                   Foreground="{StaticResource Brush_TextSecondary}" />
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Border>
+
+        <!-- 预览/按钮 -->
+        <Border Grid.Row="3" Background="{StaticResource Brush_CardBackground}"
+                CornerRadius="6" Margin="0,8,0,0"
+                BorderBrush="{StaticResource Brush_Divider}" BorderThickness="1"
+                Padding="8">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <!-- 预览信息 -->
+                <TextBlock Grid.Row="0" Grid.Column="0"
+                           x:Name="PreviewInfoText"
+                           Text="预览：等待输入..."
+                           FontSize="11"
+                           Foreground="{StaticResource Brush_TextSecondary}"
+                           VerticalAlignment="Center" />
+
+                <!-- 按钮 -->
+                <StackPanel Grid.Row="0" Grid.Column="1"
+                            Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Content="清空" Width="60" Height="28" Margin="0,0,8,0"
+                            Style="{StaticResource ToolbarButtonStyle}"
+                            Click="OnClearClick" />
+                    <Button Content="取消" Width="60" Height="28" Margin="0,0,8,0"
+                            Style="{StaticResource ToolbarButtonStyle}"
+                            Click="OnCancelClick" />
+                    <Button Content="导入" Width="80" Height="28"
+                            x:Name="ImportButton"
+                            Background="{StaticResource Brush_SelectedHighlight}"
+                            Foreground="White"
+                            IsEnabled="False"
+                            Style="{StaticResource ToolbarButtonStyle}"
+                            Click="OnImportClick" />
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

@@ -1,0 +1,28 @@
+# .NET
+bin/
+obj/
+*.user
+*.suo
+*.cache
+*.pdb
+.vs/
+*.DotSettings.user
+artifacts/
+
+# Build output (portable exe etc.)
+MultiRDPManager_Portable/
+publish/
+
+# OS junk
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# IDE / Editor
+.idea/
+*.swp
+*.swo
+*~
+
+# WorkBuddy
+.workbuddy/

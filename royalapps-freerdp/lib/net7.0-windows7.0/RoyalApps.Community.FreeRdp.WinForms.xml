@@ -1,0 +1,1151 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RoyalApps.Community.FreeRdp.WinForms</name>
+    </assembly>
+    <members>
+        <member name="T:RoyalApps.Community.FreeRdp.WinForms.CertificateErrorEventArgs">
+            <summary>
+            Event arguments for the CertificateError event
+            </summary>
+        </member>
+        <member name="M:RoyalApps.Community.FreeRdp.WinForms.CertificateErrorEventArgs.Continue">
+            <summary>
+            Ignores the error and continues. A new connection with /cert-ignore argument will be established.
+            </summary>
+        </member>
+        <member name="T:RoyalApps.Community.FreeRdp.WinForms.Configuration.AudioRedirectionMode">
+            <summary>
+            Sets and retrieves the audio redirection mode and different audio redirection options.
+            </summary>
+        </member>
+        <member name="F:RoyalApps.Community.FreeRdp.WinForms.Configuration.AudioRedirectionMode.NotSpecified">
+            <summary>
+            Audio redirection is not specified. The default value of wfreerdp.exe is used.
+            </summary>
+        </member>
+        <member name="F:RoyalApps.Community.FreeRdp.WinForms.Configuration.AudioRedirectionMode.Local">
+            <summary>
+            Audio redirection is enabled and the option for redirection is "Bring to this computer".
+            </summary>
+        </member>
+        <member name="F:RoyalApps.Community.FreeRdp.WinForms.Configuration.AudioRedirectionMode.Server">
+            <summary>
+            Audio redirection is enabled and the option is "Leave at remote computer".
+            </summary>
+        </member>
+        <member name="F:RoyalApps.Community.FreeRdp.WinForms.Configuration.AudioRedirectionMode.None">
+            <summary>
+            Audio redirection is enabled and the mode is "Do not play".
+            </summary>
+        </member>
+        <member name="T:RoyalApps.Community.FreeRdp.WinForms.Configuration.BitsPerPixel">
+            <summary>
+            The color depth (in bits per pixel) for the control's connection.
+            </summary>
+        </member>
+        <member name="F:RoyalApps.Community.FreeRdp.WinForms.Configuration.BitsPerPixel.NotSpecified">
+            <summary>
+            No color depth specified. The default value of wfreerdp.exe is used.
+            </summary>
+        </member>
+        <member name="F:RoyalApps.Community.FreeRdp.WinForms.Configuration.BitsPerPixel.HighColor8Bpp">
+            <summary>
+            8 bits per pixel
+            </summary>
+        </member>
+        <member name="F:RoyalApps.Community.FreeRdp.WinForms.Configuration.BitsPerPixel.HighColor16Bpp">
+            <summary>
+            16 bits per pixel
+            </summary>
+        </member>
+        <member name="F:RoyalApps.Community.FreeRdp.WinForms.Configuration.BitsPerPixel.HighColor24Bpp">
+            <summary>
+            24 bits per pixel
+            </summary>
+        </member>
+        <member name="F:RoyalApps.Community.FreeRdp.WinForms.Configuration.BitsPerPixel.HighColor32Bpp">
+            <summary>
+            32 bits per pixel
+            </summary>
+        </member>
+        <member name="T:RoyalApps.Community.FreeRdp.WinForms.Configuration.CacheConfiguration">
+            <summary>
+            The cache configuration for the FreeRdp connection
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.CacheConfiguration.Bitmap">
+            <summary>
+            Bitmap caching 
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.CacheConfiguration.Glyph">
+            <summary>
+            Glyph caching
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.CacheConfiguration.Offscreen">
+            <summary>
+            Off-screen caching
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.CacheConfiguration.AdditionalArguments">
+            <summary>
+            Additional cache arguments. Do not start with a comma character!
+            Example: codec[:rfx|nsc],persist,persist-file:filename]
+            </summary>
+        </member>
+        <member name="M:RoyalApps.Community.FreeRdp.WinForms.Configuration.CacheConfiguration.Validate(System.ComponentModel.DataAnnotations.ValidationContext)">
+            <inheritdoc cref="T:System.ComponentModel.DataAnnotations.IValidatableObject"/>
+        </member>
+        <member name="M:RoyalApps.Community.FreeRdp.WinForms.Configuration.CacheConfiguration.ToString">
+            <inheritdoc cref="M:RoyalApps.Community.FreeRdp.WinForms.Configuration.CacheConfiguration.ToString"/>
+        </member>
+        <member name="M:RoyalApps.Community.FreeRdp.WinForms.Configuration.CacheConfigurationTypeConverter.CanConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Type)">
+            <summary>
+            Overridden so that serialization still works - don't allow string serialization in the converter
+            which allows JSON.NET to use its standard serialization. This also still works for the
+            WinForms property sheet.
+            </summary>
+        </member>
+        <member name="T:RoyalApps.Community.FreeRdp.WinForms.Configuration.CertificateConfiguration">
+            <summary>
+            The certificate configuration for the FreeRdp connection
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.CertificateConfiguration.Deny">
+            <summary>
+            Automatically abort connection if the certificate does not match, no user interaction.
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.CertificateConfiguration.Ignore">
+            <summary>
+            Ignore the certificate checks altogether (overrules all other options).
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.CertificateConfiguration.Name">
+            <summary>
+            Use the alternate name instead of the certificate subject to match locally stored certificates.
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.CertificateConfiguration.AlternateName">
+            <summary>
+            Ignore the certificate checks altogether (overrules all other options) locally stored certificates.
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.CertificateConfiguration.TOFU">
+            <summary>
+            Trust on first use: Accept certificate unconditionally on first connect and deny on subsequent connections if the certificate does not match.
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.CertificateConfiguration.AdditionalArguments">
+            <summary>
+            Additional cache arguments. Do not start with a comma character!
+            Example: codec[:rfx|nsc],persist,persist-file:filename]
+            </summary>
+        </member>
+        <member name="M:RoyalApps.Community.FreeRdp.WinForms.Configuration.CertificateConfiguration.Validate(System.ComponentModel.DataAnnotations.ValidationContext)">
+            <inheritdoc cref="T:System.ComponentModel.DataAnnotations.IValidatableObject"/>
+        </member>
+        <member name="M:RoyalApps.Community.FreeRdp.WinForms.Configuration.CertificateConfiguration.ToString">
+            <inheritdoc cref="M:RoyalApps.Community.FreeRdp.WinForms.Configuration.CertificateConfiguration.ToString"/>
+        </member>
+        <member name="M:RoyalApps.Community.FreeRdp.WinForms.Configuration.CertificateConfigurationTypeConverter.CanConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Type)">
+            <summary>
+            Overridden so that serialization still works - don't allow string serialization in the converter
+            which allows JSON.NET to use its standard serialization. This also still works for the
+            WinForms property sheet.
+            </summary>
+        </member>
+        <member name="T:RoyalApps.Community.FreeRdp.WinForms.Configuration.FreeRdpConfiguration">
+            <summary>
+            Encapsulates configuration for <see cref="T:RoyalApps.Community.FreeRdp.WinForms.FreeRdpControl"/>.
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.FreeRdpConfiguration.AdditionalArguments">
+            <summary>
+            AdditionalArguments: Specify one or more additional arguments when wfreerdp.exe is called
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.FreeRdpConfiguration.Admin">
+            <summary>
+            Admin (or console) session
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.FreeRdpConfiguration.Aero">
+            <summary>
+            Desktop composition
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.FreeRdpConfiguration.AudioRedirection">
+            <summary>
+            Sets and retrieves the audio redirection mode and different audio redirection options.
+            </summary>
+            <remarks>
+            Command line argument: /audio-mode:[0|1|2]
+            <list type="table">
+            <listheader>
+            <term>Value</term>
+            <description>Description</description>
+            </listheader>
+            <item>
+            <term>0</term>
+            <description>Redirect locally</description>
+            </item>
+            <item>
+            <term>1</term>
+            <description>Leave on server</description>
+            </item>
+            <item>
+            <term>2</term>
+            <description>None</description>
+            </item>
+            </list>
+            </remarks>
+            <see href="https://docs.microsoft.com/en-us/windows/win32/termserv/imsrdpclientadvancedsettings5-audioredirectionmode">AudioRedirectionMode - Microsoft Documentation</see>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.FreeRdpConfiguration.AutoReconnect">
+            <summary>
+            Automatic reconnection
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.FreeRdpConfiguration.AutoReconnectMaxRetries">
+            <summary>
+            Automatic reconnection maximum retries, 0 for unlimited [0, 1000]
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.FreeRdpConfiguration.ColorDepth">
+            <summary>
+            Session bpp (color depth)
+            </summary>
+            <remarks>
+            Command line argument: /bpp:[8|16|24|32]
+            </remarks>
+            <see href="https://docs.microsoft.com/en-us/windows/win32/termserv/imsrdpclient-colordepth">ColorDepth - Microsoft Documentation</see>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.FreeRdpConfiguration.Cache">
+            <summary>
+            Cache configuration
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.FreeRdpConfiguration.Certificate">
+            <summary>
+            Certificate configuration
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.FreeRdpConfiguration.Clipboard">
+            <summary>
+            RedirectClipboard (default on): -clipboard 
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.FreeRdpConfiguration.Compression">
+            <summary>
+            Compression (default on): -compression  
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.FreeRdpConfiguration.Domain">
+            <summary>
+            Domain: /d:Domain
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.FreeRdpConfiguration.Fonts">
+            <summary>
+            SmoothFonts (default on): -fonts
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.FreeRdpConfiguration.Gateway">
+            <summary>
+            Gateway configuration
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.FreeRdpConfiguration.GDI">
+            <summary>
+            GDI rendering mode.
+            </summary>
+            <remarks>
+            Command line argument: /gdi:[sw|hw]
+            </remarks>
+            <see href="https://docs.microsoft.com/en-us/windows/win32/termserv/imsrdpextendedsettings-property">EnableHardwareMode - Microsoft Documentation</see>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.FreeRdpConfiguration.DesktopHeight">
+            <summary>
+            DesktopHeight (pixel): /h:DesktopHeight
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.FreeRdpConfiguration.KeyboardLayout">
+            <summary>
+            KeyboardLayout (0xlayout-id or layout name): /kdb:layout:[0xlayout-id]|[layout-name]
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.FreeRdpConfiguration.LoadBalanceInfo">
+            <summary>
+            Load balance info
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.FreeRdpConfiguration.MenuAnimations">
+            <summary>
+            MenuAnimations (default: off): +menu-anims
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.FreeRdpConfiguration.ProtocolSecurityNegotiation">
+            <summary>
+            ProtocolSecurityNegotiation (default on): -nego
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.FreeRdpConfiguration.Network">
+            <summary>
+            Network connection type is not specified. The default value of wfreerdp.exe is used.
+            </summary>
+            <remarks>
+            Command line argument: /network:[modem|broadband[-low|-high]|wan|lan|auto[detect]]
+            </remarks>
+            <see href="https://docs.microsoft.com/en-us/windows/win32/termserv/imsrdpclientadvancedsettings7-networkconnectiontype">NetworkConnectionType - Microsoft Documentation</see>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.FreeRdpConfiguration.Password">
+            <summary>
+            Password: /p:Password
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.FreeRdpConfiguration.ParentWindow">
+            <summary>
+            ParentWindow: /parent-window:ParentWindow
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.FreeRdpConfiguration.PCB">
+            <summary>
+            PCB (Preconnection Blob): /pcb:PCB
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.FreeRdpConfiguration.Port">
+            <summary>
+            Port: /port:Port
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.FreeRdpConfiguration.Proxy">
+            <summary>
+            ProxyConfiguration /proxy:[http|socks5]://[username]:[password]@hostname:port
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.FreeRdpConfiguration.RestrictedAdminMode">
+            <summary>
+            Restricted admin mode
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.FreeRdpConfiguration.DeviceScaleFactor">
+            <summary>
+            DeviceScaleFactor (100, 140, 180): /scale:DeviceScaleFactor
+            Recommended values:
+            100: for DesktopScaleFactor of 100
+            140: for DesktopScaleFactor between 100 and 199
+            180: for DesktopScaleFactor of 200 or more
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.FreeRdpConfiguration.DesktopScaleFactor">
+            <summary>
+            DesktopScaleFactor in percent (100-500): /scale-desktop:DesktopScaleFactor
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.FreeRdpConfiguration.Security">
+            <summary>
+            ProxyConfiguration /proxy:[http|socks5]://[username]:[password]@hostname:port
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.FreeRdpConfiguration.Shell">
+            <summary>
+            StartProgram (Alternate shell): /shell:StartProgram
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.FreeRdpConfiguration.ShellDir">
+            <summary>
+            WorkDir (Shell working directory): /shell-dir:WorkDir
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.FreeRdpConfiguration.Themes">
+            <summary>
+            Themes (default: on): -themes
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.FreeRdpConfiguration.Username">
+            <summary>
+            Username: /u:Username
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.FreeRdpConfiguration.Server">
+            <summary>
+            Server hostname: /v:Server
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.FreeRdpConfiguration.VMId">
+            <summary>
+            VMId (use port 2179, disable negotiation): /vmconnect:VMId
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.FreeRdpConfiguration.DesktopWidth">
+            <summary>
+            DesktopWidth (pixel): /w:DesktopWidth
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.FreeRdpConfiguration.Wallpaper">
+            <summary>
+            Wallpaper (default: on): -wallpaper
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.FreeRdpConfiguration.WindowDrag">
+            <summary>
+            Window Drag (default off): +window-drag
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.FreeRdpConfiguration.AutoScaling">
+            <summary>
+            AutoScaling: When enabled, the initial scale factor is determined based on DPI settings 
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.FreeRdpConfiguration.SmartReconnect">
+            <summary>
+            SmartReconnect: When enabled, the connection will be re-established to adapt to the new desktop size
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.FreeRdpConfiguration.Executable">
+            <summary>
+            The full path to an alternative wfreerdp.exe
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.FreeRdpConfiguration.TempPath">
+            <summary>
+            TempPath: The directory where wfreerdp.exe is written to if not already available
+            </summary>
+        </member>
+        <member name="M:RoyalApps.Community.FreeRdp.WinForms.Configuration.FreeRdpConfiguration.Validate(System.ComponentModel.DataAnnotations.ValidationContext)">
+            <inheritdoc cref="T:System.ComponentModel.DataAnnotations.IValidatableObject"/>
+        </member>
+        <member name="M:RoyalApps.Community.FreeRdp.WinForms.Configuration.FreeRdpConfigurationTypeConverter.CanConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Type)">
+            <summary>
+            Overridden so that serialization still works - don't allow string serialization in the converter
+            which allows JSON.NET to use its standard serialization. This also still works for the
+            WinForms property sheet.
+            </summary>
+        </member>
+        <member name="T:RoyalApps.Community.FreeRdp.WinForms.Configuration.GatewayConfiguration">
+            <summary>
+            The gateway configuration for the FreeRdp connection
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.GatewayConfiguration.Hostname">
+            <summary>
+            Hostname of the gateway, If this property is null (or empty), all gateway settings are ignored 
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.GatewayConfiguration.Port">
+            <summary>
+            Port number the gateway listens to
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.GatewayConfiguration.Username">
+            <summary>
+            Gateway username
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.GatewayConfiguration.Domain">
+            <summary>
+            Gateway user domain
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.GatewayConfiguration.Password">
+            <summary>
+            Password of the gateway user
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.GatewayConfiguration.AdditionalArguments">
+            <summary>
+            Additional gateway arguments. Do not start with a comma character!
+            Example: usage-method:[direct|detect],access-token:token,type:[rpc|http[,no-websockets][,extauth-sspi-ntlm]|auto[,no-websockets][,extauth-sspi-ntlm]]|arm,url:wss://url,bearer:oauth2-bearer-token
+            </summary>
+        </member>
+        <member name="M:RoyalApps.Community.FreeRdp.WinForms.Configuration.GatewayConfiguration.Validate(System.ComponentModel.DataAnnotations.ValidationContext)">
+            <inheritdoc cref="T:System.ComponentModel.DataAnnotations.IValidatableObject"/>
+        </member>
+        <member name="M:RoyalApps.Community.FreeRdp.WinForms.Configuration.GatewayConfiguration.ToString">
+            <inheritdoc cref="M:RoyalApps.Community.FreeRdp.WinForms.Configuration.GatewayConfiguration.ToString"/>
+        </member>
+        <member name="M:RoyalApps.Community.FreeRdp.WinForms.Configuration.GatewayConfigurationTypeConverter.CanConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Type)">
+            <summary>
+            Overridden so that serialization still works - don't allow string serialization in the converter
+            which allows JSON.NET to use its standard serialization. This also still works for the
+            WinForms property sheet.
+            </summary>
+        </member>
+        <member name="T:RoyalApps.Community.FreeRdp.WinForms.Configuration.GDIRendering">
+            <summary>
+            GDI rendering mode.
+            </summary>
+        </member>
+        <member name="F:RoyalApps.Community.FreeRdp.WinForms.Configuration.GDIRendering.NotSpecified">
+            <summary>
+            No rendering mode is specified. The default value of wfreerdp.exe is used.
+            </summary>
+        </member>
+        <member name="F:RoyalApps.Community.FreeRdp.WinForms.Configuration.GDIRendering.Software">
+            <summary>
+            Software rendering mode.
+            </summary>
+        </member>
+        <member name="F:RoyalApps.Community.FreeRdp.WinForms.Configuration.GDIRendering.Hardware">
+            <summary>
+            If set, hardware assist with graphics decoding is attempted.
+            </summary>
+        </member>
+        <member name="T:RoyalApps.Community.FreeRdp.WinForms.Configuration.NetworkConnectionType">
+            <summary>
+            Gets or sets the type of network connection used between the client and server. The network connection type information passed on to the server helps the server tune several parameters based on the network connection type.
+            </summary>
+        </member>
+        <member name="F:RoyalApps.Community.FreeRdp.WinForms.Configuration.NetworkConnectionType.NotSpecified">
+            <summary>
+            Network connection type is not specified. The default value of wfreerdp.exe is used.
+            </summary>
+        </member>
+        <member name="F:RoyalApps.Community.FreeRdp.WinForms.Configuration.NetworkConnectionType.Modem">
+            <summary>
+            Modem (56 Kbps).
+            </summary>
+        </member>
+        <member name="F:RoyalApps.Community.FreeRdp.WinForms.Configuration.NetworkConnectionType.BroadbandLow">
+            <summary>
+            Low-speed broadband (256 Kbps to 2 Mbps).
+            </summary>
+        </member>
+        <member name="F:RoyalApps.Community.FreeRdp.WinForms.Configuration.NetworkConnectionType.Broadband">
+            <summary>
+            Satellite (2 Mbps to 16 Mbps, with high latency).
+            </summary>
+        </member>
+        <member name="F:RoyalApps.Community.FreeRdp.WinForms.Configuration.NetworkConnectionType.BroadbandHigh">
+            <summary>
+            High-speed broadband (2 Mbps to 10 Mbps).
+            </summary>
+        </member>
+        <member name="F:RoyalApps.Community.FreeRdp.WinForms.Configuration.NetworkConnectionType.WAN">
+            <summary>
+            Wide area network (WAN) (10 Mbps or higher, with high latency).
+            </summary>
+        </member>
+        <member name="F:RoyalApps.Community.FreeRdp.WinForms.Configuration.NetworkConnectionType.LAN">
+            <summary>
+            Local area network (LAN) (10 Mbps or higher).
+            </summary>
+        </member>
+        <member name="F:RoyalApps.Community.FreeRdp.WinForms.Configuration.NetworkConnectionType.Autodetect">
+            <summary>
+            Tries to detect the network connection type automatically.
+            </summary>
+        </member>
+        <member name="T:RoyalApps.Community.FreeRdp.WinForms.Configuration.ProxyConfiguration">
+            <summary>
+            The proxy configuration for the FreeRdp connection
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.ProxyConfiguration.ProxyMode">
+            <summary>
+            The proxy mode for the configuration
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.ProxyConfiguration.ProxyHost">
+            <summary>
+            The proxy host name to use
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.ProxyConfiguration.ProxyPort">
+            <summary>
+            The proxy port
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.ProxyConfiguration.ProxyUsername">
+            <summary>
+            The proxy username
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.ProxyConfiguration.ProxyPassword">
+            <summary>
+            The proxy password
+            </summary>
+        </member>
+        <member name="M:RoyalApps.Community.FreeRdp.WinForms.Configuration.ProxyConfiguration.Validate(System.ComponentModel.DataAnnotations.ValidationContext)">
+            <inheritdoc cref="T:System.ComponentModel.DataAnnotations.IValidatableObject"/>
+        </member>
+        <member name="M:RoyalApps.Community.FreeRdp.WinForms.Configuration.ProxyConfiguration.ToString">
+            <inheritdoc cref="M:RoyalApps.Community.FreeRdp.WinForms.Configuration.ProxyConfiguration.ToString"/>
+        </member>
+        <member name="M:RoyalApps.Community.FreeRdp.WinForms.Configuration.ProxyConfigurationTypeConverter.CanConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Type)">
+            <summary>
+            Overridden so that serialization still works - don't allow string serialization in the converter
+            which allows JSON.NET to use its standard serialization. This also still works for the
+            WinForms property sheet.
+            </summary>
+        </member>
+        <member name="T:RoyalApps.Community.FreeRdp.WinForms.Configuration.ProxyMode">
+            <summary>
+            The proxy mode for the FreeRdp connection
+            </summary>
+        </member>
+        <member name="F:RoyalApps.Community.FreeRdp.WinForms.Configuration.ProxyMode.None">
+            <summary>
+            No proxy will be used (default)
+            </summary>
+        </member>
+        <member name="F:RoyalApps.Community.FreeRdp.WinForms.Configuration.ProxyMode.HTTP">
+            <summary>
+            Use HTTP proxy
+            </summary>
+        </member>
+        <member name="F:RoyalApps.Community.FreeRdp.WinForms.Configuration.ProxyMode.SOCKS5">
+            <summary>
+            Use SOCKS5 proxy
+            </summary>
+        </member>
+        <member name="T:RoyalApps.Community.FreeRdp.WinForms.Configuration.SecurityConfiguration">
+            <summary>
+            The security configuration for the FreeRdp connection
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.SecurityConfiguration.RDP">
+            <summary>
+            RDP protocol security
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.SecurityConfiguration.TLS">
+            <summary>
+            TLS protocol security
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.SecurityConfiguration.NLA">
+            <summary>
+            NLA protocol security
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.SecurityConfiguration.Ext">
+            <summary>
+            NLA extended protocol security
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.Configuration.SecurityConfiguration.AAD">
+            <summary>
+            AAD protocol security
+            </summary>
+        </member>
+        <member name="M:RoyalApps.Community.FreeRdp.WinForms.Configuration.SecurityConfiguration.Validate(System.ComponentModel.DataAnnotations.ValidationContext)">
+            <inheritdoc cref="T:System.ComponentModel.DataAnnotations.IValidatableObject"/>
+        </member>
+        <member name="M:RoyalApps.Community.FreeRdp.WinForms.Configuration.SecurityConfiguration.ToString">
+            <inheritdoc cref="M:RoyalApps.Community.FreeRdp.WinForms.Configuration.SecurityConfiguration.ToString"/>
+        </member>
+        <member name="M:RoyalApps.Community.FreeRdp.WinForms.Configuration.SecurityConfigurationTypeConverter.CanConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Type)">
+            <summary>
+            Overridden so that serialization still works - don't allow string serialization in the converter
+            which allows JSON.NET to use its standard serialization. This also still works for the
+            WinForms property sheet.
+            </summary>
+        </member>
+        <member name="T:RoyalApps.Community.FreeRdp.WinForms.DisconnectEventArgs">
+            <summary>
+            Contains disconnect information.
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.DisconnectEventArgs.ExitCode">
+            <summary>
+            The exit code of wfreerdp.exe
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.DisconnectEventArgs.UserInitiated">
+            <summary>
+            Whether or not the disconnected by the user directly.
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.DisconnectEventArgs.ErrorMessage">
+            <summary>
+            The error message from exit code.
+            </summary>
+        </member>
+        <member name="M:RoyalApps.Community.FreeRdp.WinForms.DisconnectEventArgs.#ctor(System.UInt32)">
+            <summary>
+            Creates a new event arg instance.
+            </summary>
+            <param name="exitCode">The exit code of wfreerdp.exe</param>
+        </member>
+        <member name="T:RoyalApps.Community.FreeRdp.WinForms.FreeRdpControl">
+            <summary>
+            Hosts the FreeRDP session created wfreerdp.exe.
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.FreeRdpControl.Configuration">
+            <summary>
+            FreeRDP configuration settings 
+            </summary>
+        </member>
+        <member name="P:RoyalApps.Community.FreeRdp.WinForms.FreeRdpControl.Logger">
+            <summary>
+            Logger instance
+            </summary>
+        </member>
+        <member name="E:RoyalApps.Community.FreeRdp.WinForms.FreeRdpControl.Connected">
+            <summary>
+            Raised when wfreerdp.exe has been started.
+            </summary>
+        </member>
+        <member name="E:RoyalApps.Community.FreeRdp.WinForms.FreeRdpControl.Disconnected">
+            <summary>
+            Raised when wfreerdp.exe has exited.
+            </summary>
+        </member>
+        <member name="E:RoyalApps.Community.FreeRdp.WinForms.FreeRdpControl.CertificateError">
+            <summary>
+            Raised when the TLS handshake fails because if an incorrect server certificate.
+            </summary>
+        </member>
+        <member name="E:RoyalApps.Community.FreeRdp.WinForms.FreeRdpControl.VerifyCredentials">
+            <summary>
+            Raised when login failed.
+            </summary>
+        </member>
+        <member name="M:RoyalApps.Community.FreeRdp.WinForms.FreeRdpControl.#ctor">
+            <summary>
+            FreeRdpControl constructor
+            </summary>
+        </member>
+        <member name="M:RoyalApps.Community.FreeRdp.WinForms.FreeRdpControl.Dispose(System.Boolean)">
+            <summary>
+            Clean up resources
+            </summary>
+            <param name="disposing">disposing</param>
+        </member>
+        <member name="M:RoyalApps.Community.FreeRdp.WinForms.FreeRdpControl.WndProc(System.Windows.Forms.Message@)">
+            <inheritdoc cref="M:RoyalApps.Community.FreeRdp.WinForms.FreeRdpControl.WndProc(System.Windows.Forms.Message@)"/>
+        </member>
+        <member name="M:RoyalApps.Community.FreeRdp.WinForms.FreeRdpControl.OnLoad(System.EventArgs)">
+            <summary>
+            OnLoad override
+            </summary>
+            <param name="e">EventArgs</param>
+        </member>
+        <member name="M:RoyalApps.Community.FreeRdp.WinForms.FreeRdpControl.OnSizeChanged(System.EventArgs)">
+            <summary>
+            OnSizeChanged override
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:RoyalApps.Community.FreeRdp.WinForms.FreeRdpControl.Connect">
+            <summary>
+            Starts the FreeRDP session using the wfreerdp.exe
+            </summary>
+        </member>
+        <member name="M:RoyalApps.Community.FreeRdp.WinForms.FreeRdpControl.Disconnect">
+            <summary>
+            Ends the FreeRDP session by ending the wfreerdp.exe process.
+            </summary>
+        </member>
+        <member name="M:RoyalApps.Community.FreeRdp.WinForms.FreeRdpControl.ResetZoom">
+            <summary>
+            Resets the zoom factor to the initial zoom factor
+            </summary>
+        </member>
+        <member name="M:RoyalApps.Community.FreeRdp.WinForms.FreeRdpControl.SetZoomLevel(System.Int32)">
+            <summary>
+            Sets the desired zoom level (DPI) in percent of the remote desktop session.
+            The value must be in the range between 100 and 500.
+            </summary>
+            <param name="scalingInPercent">Scaling factor in percent</param>
+        </member>
+        <member name="M:RoyalApps.Community.FreeRdp.WinForms.FreeRdpControl.ZoomIn">
+            <summary>
+            Increase zoom factor
+            </summary>
+        </member>
+        <member name="M:RoyalApps.Community.FreeRdp.WinForms.FreeRdpControl.ZoomOut">
+            <summary>
+            Decrease zoom factor
+            </summary>
+        </member>
+        <member name="T:RoyalApps.Community.FreeRdp.WinForms.ProcessJobTracker">
+            <summary>
+            Allows processes to be automatically killed if this parent process unexpectedly quits
+            (or when an instance of this class is disposed).
+            </summary>
+            <remarks>
+            This "just works" on Windows 8.
+            To support Windows Vista or Windows 7 requires an app.manifest with specific content as described here:
+            https://stackoverflow.com/a/9507862/46926
+            </remarks>
+        </member>
+        <member name="F:RoyalApps.Community.FreeRdp.WinForms.ProcessJobTracker._jobHandle">
+            <summary>
+            The job handle.
+            </summary>
+            <remarks>
+            Closing this handle would close all tracked processes. So we don't do it in this process
+            so that it happens automatically when our process exits.
+            </remarks>
+        </member>
+        <member name="M:RoyalApps.Community.FreeRdp.WinForms.ProcessJobTracker.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RoyalApps.Community.FreeRdp.WinForms.ProcessJobTracker"/> class.
+            </summary>
+        </member>
+        <member name="M:RoyalApps.Community.FreeRdp.WinForms.ProcessJobTracker.AddProcess(System.Diagnostics.Process)">
+            <summary>
+            Ensures a given process is killed when the current process exits.
+            </summary>
+            <param name="process">The process whose lifetime should never exceed the lifetime of the current process.</param>
+        </member>
+        <member name="M:RoyalApps.Community.FreeRdp.WinForms.ProcessJobTracker.Dispose">
+            <summary>
+            Kills all processes previously tracked with <see cref="M:RoyalApps.Community.FreeRdp.WinForms.ProcessJobTracker.AddProcess(System.Diagnostics.Process)"/> by closing the Windows Job.
+            </summary>
+        </member>
+        <member name="T:RoyalApps.Community.FreeRdp.WinForms.VerifyCredentialsEventArgs">
+            <summary>
+            Event arguments for the VerifyCredentials event
+            </summary>
+        </member>
+        <member name="M:RoyalApps.Community.FreeRdp.WinForms.VerifyCredentialsEventArgs.SetCredentials(System.String,System.String,System.String)">
+            <summary>
+            Set a username, domain and a password and try the connection again
+            </summary>
+        </member>
+        <member name="T:Windows.Win32.Foundation.PCWSTR">
+            <summary>
+            A pointer to a null-terminated, constant character string.
+            </summary>
+        </member>
+        <member name="F:Windows.Win32.Foundation.PCWSTR.Value">
+            <summary>
+            A pointer to the first character in the string. The content should be considered readonly, as it was typed as constant in the SDK.
+            </summary>
+        </member>
+        <member name="P:Windows.Win32.Foundation.PCWSTR.Length">
+            <summary>
+            Gets the number of characters up to the first null character (exclusive).
+            </summary>
+        </member>
+        <member name="M:Windows.Win32.Foundation.PCWSTR.ToString">
+            <summary>
+            Returns a <see langword="string"/> with a copy of this character array, up to the first null character (exclusive).
+            </summary>
+            <returns>A <see langword="string"/>, or <see langword="null"/> if <see cref="F:Windows.Win32.Foundation.PCWSTR.Value"/> is <see langword="null"/>.</returns>
+        </member>
+        <member name="M:Windows.Win32.Foundation.PCWSTR.AsSpan">
+            <summary>
+            Returns a span of the characters in this string, up to the first null character (exclusive).
+            </summary>
+        </member>
+        <member name="P:Windows.Win32.Foundation.PWSTR.Length">
+            <inheritdoc cref="P:Windows.Win32.Foundation.PCWSTR.Length"/>
+        </member>
+        <member name="M:Windows.Win32.Foundation.PWSTR.ToString">
+            <inheritdoc cref="M:Windows.Win32.Foundation.PCWSTR.ToString"/>
+        </member>
+        <member name="M:Windows.Win32.Foundation.PWSTR.AsSpan">
+            <summary>
+            Returns a span of the characters in this string, up to the first null character (exclusive).
+            </summary>
+        </member>
+        <member name="T:Windows.Win32.System.Threading.IO_COUNTERS">
+            <summary>Contains I/O accounting information for a process or a job object.</summary>
+            <remarks>
+            <para><see href="https://docs.microsoft.com/windows/win32/api/winnt/ns-winnt-io_counters">Learn more about this API from docs.microsoft.com</see>.</para>
+            </remarks>
+        </member>
+        <member name="F:Windows.Win32.System.Threading.IO_COUNTERS.ReadOperationCount">
+            <summary>The number of read operations performed.</summary>
+        </member>
+        <member name="F:Windows.Win32.System.Threading.IO_COUNTERS.WriteOperationCount">
+            <summary>The number of write operations performed.</summary>
+        </member>
+        <member name="F:Windows.Win32.System.Threading.IO_COUNTERS.OtherOperationCount">
+            <summary>The number of I/O operations performed, other than read and write operations.</summary>
+        </member>
+        <member name="F:Windows.Win32.System.Threading.IO_COUNTERS.ReadTransferCount">
+            <summary>The number of bytes read.</summary>
+        </member>
+        <member name="F:Windows.Win32.System.Threading.IO_COUNTERS.WriteTransferCount">
+            <summary>The number of bytes written.</summary>
+        </member>
+        <member name="F:Windows.Win32.System.Threading.IO_COUNTERS.OtherTransferCount">
+            <summary>The number of bytes transferred during operations other than read and write operations.</summary>
+        </member>
+        <member name="T:Windows.Win32.System.JobObjects.JOBOBJECT_BASIC_LIMIT_INFORMATION">
+            <summary>Contains basic limit information for a job object.</summary>
+            <remarks>
+            <para>Processes can still empty their working sets using the <a href="https://docs.microsoft.com/windows/win32/api/memoryapi/nf-memoryapi-setprocessworkingsetsize">SetProcessWorkingSetSize</a> function with (<b>SIZE_T</b>)-1, even when <b>JOB_OBJECT_LIMIT_WORKINGSET</b> is used. However, you cannot use <b>SetProcessWorkingSetSize</b> change the minimum or maximum working set size of a process in a job object. The system increments the active process count when you attempt to associate a process with a job. If the limit is exceeded, the system decrements the active process count only when the process terminates and all handles to the process are closed. Therefore, if you have an open handle to a process that has been terminated in such a manner, you cannot associate any new processes until the handle is closed and the active process count is below the limit.</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api/winnt/ns-winnt-jobobject_basic_limit_information#">Read more on docs.microsoft.com</see>.</para>
+            </remarks>
+        </member>
+        <member name="F:Windows.Win32.System.JobObjects.JOBOBJECT_BASIC_LIMIT_INFORMATION.PerProcessUserTimeLimit">
+            <summary>
+            <para>If <b>LimitFlags</b> specifies <b>JOB_OBJECT_LIMIT_PROCESS_TIME</b>, this member is the per-process user-mode execution time limit, in 100-nanosecond ticks. Otherwise, this member is ignored.</para>
+            <para>The system periodically checks to determine whether each process associated with the job has accumulated more user-mode time than the set limit. If it has, the process is terminated. If the job is nested, the effective limit is the most restrictive limit in the job chain.</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api/winnt/ns-winnt-jobobject_basic_limit_information#members">Read more on docs.microsoft.com</see>.</para>
+            </summary>
+        </member>
+        <member name="F:Windows.Win32.System.JobObjects.JOBOBJECT_BASIC_LIMIT_INFORMATION.PerJobUserTimeLimit">
+            <summary>
+            <para>If <b>LimitFlags</b> specifies <b>JOB_OBJECT_LIMIT_JOB_TIME</b>, this member is the per-job user-mode execution time limit, in 100-nanosecond ticks. Otherwise, this member is ignored.</para>
+            <para>The system adds the current time of the processes associated with the job to this limit. For example, if you set this limit to 1 minute, and the job has a process that has accumulated 5 minutes of user-mode time, the limit actually enforced is 6 minutes. The system periodically checks to determine whether the sum of the user-mode execution time for all processes is greater than this end-of-job limit. If it is, the action specified in the <b>EndOfJobTimeAction</b> member of the <a href="https://docs.microsoft.com/windows/desktop/api/winnt/ns-winnt-jobobject_end_of_job_time_information">JOBOBJECT_END_OF_JOB_TIME_INFORMATION</a> structure is carried out. By default, all processes are terminated and the status code is set to <b>ERROR_NOT_ENOUGH_QUOTA</b>. To register  for  notification when this limit is exceeded without terminating processes, use the <a href="https://docs.microsoft.com/windows/desktop/api/jobapi2/nf-jobapi2-setinformationjobobject">SetInformationJobObject</a> function with the <b>JobObjectNotificationLimitInformation</b> information class.</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api/winnt/ns-winnt-jobobject_basic_limit_information#members">Read more on docs.microsoft.com</see>.</para>
+            </summary>
+        </member>
+        <member name="F:Windows.Win32.System.JobObjects.JOBOBJECT_BASIC_LIMIT_INFORMATION.LimitFlags">
+            <summary></summary>
+        </member>
+        <member name="F:Windows.Win32.System.JobObjects.JOBOBJECT_BASIC_LIMIT_INFORMATION.MinimumWorkingSetSize">
+            <summary>
+            <para>If <b>LimitFlags</b> specifies <b>JOB_OBJECT_LIMIT_WORKINGSET</b>, this member is the minimum working set size in bytes for each process associated with the job. Otherwise, this member is ignored. If <b>MaximumWorkingSetSize</b> is nonzero, <b>MinimumWorkingSetSize</b> cannot be zero.</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api/winnt/ns-winnt-jobobject_basic_limit_information#members">Read more on docs.microsoft.com</see>.</para>
+            </summary>
+        </member>
+        <member name="F:Windows.Win32.System.JobObjects.JOBOBJECT_BASIC_LIMIT_INFORMATION.MaximumWorkingSetSize">
+            <summary>
+            <para>If <b>LimitFlags</b> specifies <b>JOB_OBJECT_LIMIT_WORKINGSET</b>, this member is the maximum working set size in bytes for each process associated with the job. Otherwise, this member is ignored. If <b>MinimumWorkingSetSize</b> is nonzero, <b>MaximumWorkingSetSize</b> cannot be zero.</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api/winnt/ns-winnt-jobobject_basic_limit_information#members">Read more on docs.microsoft.com</see>.</para>
+            </summary>
+        </member>
+        <member name="F:Windows.Win32.System.JobObjects.JOBOBJECT_BASIC_LIMIT_INFORMATION.ActiveProcessLimit">
+            <summary>
+            <para>If <b>LimitFlags</b> specifies <b>JOB_OBJECT_LIMIT_ACTIVE_PROCESS</b>, this member is the active process limit for the job. Otherwise, this member is ignored. If you try to associate a process with a job, and this causes the active process count to exceed this limit, the process is terminated and the association fails.</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api/winnt/ns-winnt-jobobject_basic_limit_information#members">Read more on docs.microsoft.com</see>.</para>
+            </summary>
+        </member>
+        <member name="F:Windows.Win32.System.JobObjects.JOBOBJECT_BASIC_LIMIT_INFORMATION.Affinity">
+            <summary>
+            <para>If <b>LimitFlags</b> specifies <b>JOB_OBJECT_LIMIT_AFFINITY</b>, this member is the processor affinity for all processes associated with the job. Otherwise, this member is ignored. The affinity must be a subset of the system affinity mask obtained by calling the <a href="https://docs.microsoft.com/windows/desktop/api/winbase/nf-winbase-getprocessaffinitymask">GetProcessAffinityMask</a> function. The affinity of each thread is set to this value, but threads are free to subsequently set their affinity, as long as it is a subset of the specified affinity mask. Processes cannot set their own affinity mask.</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api/winnt/ns-winnt-jobobject_basic_limit_information#members">Read more on docs.microsoft.com</see>.</para>
+            </summary>
+        </member>
+        <member name="F:Windows.Win32.System.JobObjects.JOBOBJECT_BASIC_LIMIT_INFORMATION.PriorityClass">
+            <summary>
+            <para>If <b>LimitFlags</b> specifies <b>JOB_OBJECT_LIMIT_PRIORITY_CLASS</b>, this member is the priority class for all processes associated with the job. Otherwise, this member is ignored. Processes and threads cannot modify their priority class. The calling process must enable the <b>SE_INC_BASE_PRIORITY_NAME</b> privilege.</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api/winnt/ns-winnt-jobobject_basic_limit_information#members">Read more on docs.microsoft.com</see>.</para>
+            </summary>
+        </member>
+        <member name="F:Windows.Win32.System.JobObjects.JOBOBJECT_BASIC_LIMIT_INFORMATION.SchedulingClass">
+            <summary>
+            <para>If <b>LimitFlags</b> specifies <b>JOB_OBJECT_LIMIT_SCHEDULING_CLASS</b>, this member is the scheduling class for all processes associated with the job. Otherwise, this member is ignored. The valid values are 0 to 9. Use 0 for the least favorable scheduling class relative to other threads, and 9 for the most favorable scheduling class relative to other threads. By default, this value is 5. To use a scheduling class greater than 5, the calling process must enable the <b>SE_INC_BASE_PRIORITY_NAME</b> privilege.</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api/winnt/ns-winnt-jobobject_basic_limit_information#members">Read more on docs.microsoft.com</see>.</para>
+            </summary>
+        </member>
+        <member name="T:Windows.Win32.System.JobObjects.JOBOBJECT_EXTENDED_LIMIT_INFORMATION">
+            <summary>Contains basic and extended limit information for a job object.</summary>
+            <remarks>
+            <para>The system tracks the value of <b>PeakProcessMemoryUsed</b> and <b>PeakJobMemoryUsed</b> constantly. This allows you know the peak memory usage of each job. You can use this information to establish a memory limit using the <b>JOB_OBJECT_LIMIT_PROCESS_MEMORY</b> or <b>JOB_OBJECT_LIMIT_JOB_MEMORY</b> value. Note that the job memory and process memory limits are very similar in operation, but they are independent. You could set a job-wide limit of 100 MB with a per-process limit of 10 MB. In this scenario, no single process could commit more than 10 MB, and the set of processes associated with a job could never exceed 100 MB. To register for notifications  that a job has exceeded its peak memory limit while allowing processes to continue to commit memory, use the <a href="https://docs.microsoft.com/windows/desktop/api/jobapi2/nf-jobapi2-setinformationjobobject">SetInformationJobObject</a> function with the <b>JobObjectNotificationLimitInformation</b> information class.</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api/winnt/ns-winnt-jobobject_extended_limit_information#">Read more on docs.microsoft.com</see>.</para>
+            </remarks>
+        </member>
+        <member name="F:Windows.Win32.System.JobObjects.JOBOBJECT_EXTENDED_LIMIT_INFORMATION.BasicLimitInformation">
+            <summary>
+            <para>A <a href="https://docs.microsoft.com/windows/desktop/api/winnt/ns-winnt-jobobject_basic_limit_information">JOBOBJECT_BASIC_LIMIT_INFORMATION</a> structure that contains basic limit information.</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api/winnt/ns-winnt-jobobject_extended_limit_information#members">Read more on docs.microsoft.com</see>.</para>
+            </summary>
+        </member>
+        <member name="F:Windows.Win32.System.JobObjects.JOBOBJECT_EXTENDED_LIMIT_INFORMATION.IoInfo">
+            <summary>Reserved.</summary>
+        </member>
+        <member name="F:Windows.Win32.System.JobObjects.JOBOBJECT_EXTENDED_LIMIT_INFORMATION.ProcessMemoryLimit">
+            <summary>
+            <para>If the <b>LimitFlags</b> member of the <a href="https://docs.microsoft.com/windows/desktop/api/winnt/ns-winnt-jobobject_basic_limit_information">JOBOBJECT_BASIC_LIMIT_INFORMATION</a> structure specifies the <b>JOB_OBJECT_LIMIT_PROCESS_MEMORY</b> value, this member specifies the limit for the virtual memory that can be committed by a process. Otherwise, this member is ignored.</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api/winnt/ns-winnt-jobobject_extended_limit_information#members">Read more on docs.microsoft.com</see>.</para>
+            </summary>
+        </member>
+        <member name="F:Windows.Win32.System.JobObjects.JOBOBJECT_EXTENDED_LIMIT_INFORMATION.JobMemoryLimit">
+            <summary>
+            <para>If the <b>LimitFlags</b> member of the <a href="https://docs.microsoft.com/windows/desktop/api/winnt/ns-winnt-jobobject_basic_limit_information">JOBOBJECT_BASIC_LIMIT_INFORMATION</a> structure specifies the <b>JOB_OBJECT_LIMIT_JOB_MEMORY</b> value, this member specifies the limit for the virtual memory that can be committed for the job. Otherwise, this member is ignored.</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api/winnt/ns-winnt-jobobject_extended_limit_information#members">Read more on docs.microsoft.com</see>.</para>
+            </summary>
+        </member>
+        <member name="F:Windows.Win32.System.JobObjects.JOBOBJECT_EXTENDED_LIMIT_INFORMATION.PeakProcessMemoryUsed">
+            <summary>The peak memory used by any process ever associated with the job.</summary>
+        </member>
+        <member name="F:Windows.Win32.System.JobObjects.JOBOBJECT_EXTENDED_LIMIT_INFORMATION.PeakJobMemoryUsed">
+            <summary>The peak memory usage of all processes currently associated with the job.</summary>
+        </member>
+        <member name="T:Windows.Win32.PInvoke">
+            <content>
+            Contains extern methods from "KERNEL32.dll".
+            </content>
+            <content>
+            Contains extern methods from "USER32.dll".
+            </content>
+        </member>
+        <member name="F:Windows.Win32.PInvoke.WM_SETFOCUS">
+            <summary>Sent to a window after it has gained the keyboard focus.</summary>
+            <returns>An application should return zero if it processes this message.</returns>
+            <remarks>To display a caret, an application should call the appropriate caret functions when it receives the **WM\_SETFOCUS** message.</remarks>
+        </member>
+        <member name="F:Windows.Win32.PInvoke.WM_MOUSEACTIVATE">
+            <summary>Sent when the cursor is in an inactive window and the user presses a mouse button. The parent window receives this message only if the child window passes it to the DefWindowProc function.</summary>
+            <returns>
+            <para>The return value specifies whether the window should be activated and whether the identifier of the mouse message should be discarded. It must be one of the following values.</para>
+            <para>| Return code/value                                                                                                                                          | Description                                                                      | |------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------| | <dl> <dt>**MA\_ACTIVATE**</dt> <dt>1</dt> </dl>         | Activates the window, and does not discard the mouse message.<br/>         | | <dl> <dt>**MA\_ACTIVATEANDEAT**</dt> <dt>2</dt> </dl>   | Activates the window, and discards the mouse message.<br/>                 | | <dl> <dt>**MA\_NOACTIVATE**</dt> <dt>3</dt> </dl>       | Does not activate the window, and does not discard the mouse message.<br/> | | <dl> <dt>**MA\_NOACTIVATEANDEAT**</dt> <dt>4</dt> </dl> | Does not activate the window, but discards the mouse message.<br/>         |</para>
+            </returns>
+            <remarks>The [**DefWindowProc**](/windows/desktop/api/winuser/nf-winuser-defwindowproca) function passes the message to a child window's parent window before any processing occurs. The parent window determines whether to activate the child window. If it activates the child window, the parent window should return **MA\_NOACTIVATE** or **MA\_NOACTIVATEANDEAT** to prevent the system from processing the message further.</remarks>
+        </member>
+        <member name="M:Windows.Win32.PInvoke.CloseHandle(Windows.Win32.Foundation.HANDLE)">
+            <summary>Closes an open object handle.</summary>
+            <param name="hObject">A valid handle to an open object.</param>
+            <returns>
+            <para>If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call <a href="https://docs.microsoft.com/windows/desktop/api/errhandlingapi/nf-errhandlingapi-getlasterror">GetLastError</a>. If the application is running under a debugger,  the function will throw an exception if it receives either a  handle value that is not valid  or a pseudo-handle value. This can happen if you close a handle twice, or if you  call <b>CloseHandle</b> on a handle returned by the <a href="https://docs.microsoft.com/windows/desktop/api/fileapi/nf-fileapi-findfirstfilea">FindFirstFile</a> function instead of calling the <a href="https://docs.microsoft.com/windows/desktop/api/fileapi/nf-fileapi-findclose">FindClose</a> function.</para>
+            </returns>
+            <remarks>
+            <para>The <b>CloseHandle</b> function closes handles to the following objects: </para>
+            <para>This doc was truncated.</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api/handleapi/nf-handleapi-closehandle#">Read more on docs.microsoft.com</see>.</para>
+            </remarks>
+        </member>
+        <member name="M:Windows.Win32.PInvoke.AssignProcessToJobObject(System.Runtime.InteropServices.SafeHandle,System.Runtime.InteropServices.SafeHandle)">
+            <inheritdoc cref="M:Windows.Win32.PInvoke.AssignProcessToJobObject(Windows.Win32.Foundation.HANDLE,Windows.Win32.Foundation.HANDLE)"/>
+        </member>
+        <member name="M:Windows.Win32.PInvoke.AssignProcessToJobObject(Windows.Win32.Foundation.HANDLE,Windows.Win32.Foundation.HANDLE)">
+            <summary>Assigns a process to an existing job object.</summary>
+            <param name="hJob">
+            <para>A handle to the job object to which the process will be associated. The <a href="https://docs.microsoft.com/windows/desktop/api/winbase/nf-winbase-createjobobjecta">CreateJobObject</a> or <a href="https://docs.microsoft.com/windows/desktop/api/winbase/nf-winbase-openjobobjecta">OpenJobObject</a> function returns this handle. The handle must have the JOB_OBJECT_ASSIGN_PROCESS access right. For more information, see <a href="https://docs.microsoft.com/windows/desktop/ProcThread/job-object-security-and-access-rights">Job Object Security and Access Rights</a>.</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api/jobapi2/nf-jobapi2-assignprocesstojobobject#parameters">Read more on docs.microsoft.com</see>.</para>
+            </param>
+            <param name="hProcess">
+            <para>A handle to the process to associate with the job object. The handle must have the PROCESS_SET_QUOTA and PROCESS_TERMINATE access rights. For more information, see <a href="https://docs.microsoft.com/windows/desktop/ProcThread/process-security-and-access-rights">Process Security and Access Rights</a>. If the process is already associated with a job, the job specified by <i>hJob</i> must be empty or it must be in the hierarchy of nested jobs to which the process already belongs, and it cannot have UI limits set (<a href="https://docs.microsoft.com/windows/desktop/api/jobapi2/nf-jobapi2-setinformationjobobject">SetInformationJobObject</a> with <b>JobObjectBasicUIRestrictions</b>). For more information, see Remarks. <b>Windows 7, Windows Server 2008 R2, Windows XP with SP3, Windows Server 2008, Windows Vista and Windows Server 2003:  </b>The process must not already be assigned to a job; if it is, the function fails with ERROR_ACCESS_DENIED. This behavior changed starting in Windows 8 and Windows Server 2012. <b>Terminal Services:  </b>All processes within a job must run within the same session as the job.</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api/jobapi2/nf-jobapi2-assignprocesstojobobject#parameters">Read more on docs.microsoft.com</see>.</para>
+            </param>
+            <returns>
+            <para>If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call <a href="https://docs.microsoft.com/windows/desktop/api/errhandlingapi/nf-errhandlingapi-getlasterror">GetLastError</a>.</para>
+            </returns>
+            <remarks>
+            <para>After you associate a process with a job object using <b>AssignProcessToJobObject</b>, the process is subject to the limits set for the job. To set limits for a job, use the <a href="https://docs.microsoft.com/windows/desktop/api/jobapi2/nf-jobapi2-setinformationjobobject">SetInformationJobObject</a> function. If the job has a user-mode time limit, and the time limit has been exhausted, <b>AssignProcessToJobObject</b> fails and the specified process is terminated. If the time limit would be exceeded by associating the process, <b>AssignProcessToJobObject</b> still succeeds. However, the time limit violation will be reported. If the job has an active process limit, and the limit would be exceeded by associating this process, <b>AssignProcessToJobObject</b> fails, and the specified process is terminated. Memory operations performed by a process associated with a job that has a memory limit are subject to the memory limit. Memory operations performed by the process before it was associated with the job are not examined by <b>AssignProcessToJobObject</b>. If the process is already running and the job has security limitations, <b>AssignProcessToJobObject</b> may fail. For example, if the primary token of the process contains the local administrators group, but the job object has the security limitation JOB_OBJECT_SECURITY_NO_ADMIN, the function fails. If the job has the security limitation JOB_OBJECT_SECURITY_ONLY_TOKEN, the process must be created suspended. To create a suspended process, call the <a href="https://docs.microsoft.com/windows/desktop/api/processthreadsapi/nf-processthreadsapi-createprocessa">CreateProcess</a> function with the CREATE_SUSPENDED flag. A process can be associated with more than one job in a hierarchy of nested jobs. For priority class, affinity, commit charge, per-process execution time limit, scheduling class limit, and working set minimum and maximum, the process inherits an effective limit which is the most restrictive limit of all the jobs in its parent job chain. For other resource limits, the process inherits limits from its immediate job in the hierarchy. Accounting information is added to the  immediate job and aggregated in each parent job in the job chain. By default, all child processes are associated with the immediate job and every job in the parent job chain. To create a child process that is not part of the same job chain, call the <a href="https://docs.microsoft.com/windows/desktop/api/processthreadsapi/nf-processthreadsapi-createprocessa">CreateProcess</a> function with the CREATE_BREAKAWAY_FROM_JOB flag. The child process breaks away from every job in the job chain unless a job in the chain does not allow breakaway. In this case, the child process does not break away from that job or any job above it in the job chain. For more information, see <a href="https://docs.microsoft.com/windows/desktop/ProcThread/nested-jobs">Nested Jobs</a>. <b>Windows 7, Windows Server 2008 R2, Windows XP with SP3, Windows Server 2008, Windows Vista and Windows Server 2003:  </b>A process can be associated only with a single job. A process inherits limits from the job it is associated with and adds its accounting information to the job. If a process is associated with a job, all child processes it creates are associated with that job by default. To create a child process that is not part of the same job, call the <a href="https://docs.microsoft.com/windows/desktop/api/processthreadsapi/nf-processthreadsapi-createprocessa">CreateProcess</a> function with the CREATE_BREAKAWAY_FROM_JOB flag. A process can be associated with more than one job starting in Windows 8 and Windows Server 2012. <b>Windows 7, Windows Server 2008 R2, Windows Server 2008 and Windows Vista:  </b>If the process is being monitored by the Program Compatibility Assistant (PCA), it is placed into a compatibility job. Therefore, the process must be created using CREATE_BREAKAWAY_FROM_JOB before it can be placed in another job. Alternatively, you can embed an application manifest that specifies a User Account Control (UAC) level in your application and PCA will not add the process to the compatibility job. For more information, see <a href="https://docs.microsoft.com/previous-versions/dotnet/articles/bb530410(v=msdn.10)">Application Development Requirements for User Account Control Compatibility</a>. If the job or any of its parent jobs in the job chain is terminating when <b>AssignProcessToJob</b> is called, the function fails. To compile an application that uses this function, define _WIN32_WINNT as 0x0500 or later. For more information, see <a href="https://docs.microsoft.com/windows/desktop/WinProg/using-the-windows-headers">Using the Windows Headers</a>.</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api/jobapi2/nf-jobapi2-assignprocesstojobobject#">Read more on docs.microsoft.com</see>.</para>
+            </remarks>
+        </member>
+        <member name="M:Windows.Win32.PInvoke.CreateJobObject(System.Nullable{Windows.Win32.Security.SECURITY_ATTRIBUTES},System.String)">
+            <inheritdoc cref="M:Windows.Win32.PInvoke.CreateJobObject(Windows.Win32.Security.SECURITY_ATTRIBUTES*,Windows.Win32.Foundation.PCWSTR)"/>
+        </member>
+        <member name="M:Windows.Win32.PInvoke.CreateJobObject(Windows.Win32.Security.SECURITY_ATTRIBUTES*,Windows.Win32.Foundation.PCWSTR)">
+            <summary>Creates or opens a job object. (CreateJobObjectW)</summary>
+            <param name="lpJobAttributes">
+            <para>A pointer to a <a href="https://docs.microsoft.com/previous-versions/windows/desktop/legacy/aa379560(v=vs.85)">SECURITY_ATTRIBUTES</a> structure that specifies the security descriptor for the job object and determines whether child processes can inherit the returned handle. If <i>lpJobAttributes</i> is <b>NULL</b>, the job object gets a default security descriptor and the handle cannot be inherited. The ACLs in the default security descriptor for a job object come from the primary or impersonation token of the creator.</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api/jobapi2/nf-jobapi2-createjobobjectw#parameters">Read more on docs.microsoft.com</see>.</para>
+            </param>
+            <param name="lpName">
+            <para>The name of the job. The name is limited to <b>MAX_PATH</b> characters. Name comparison is case-sensitive.</para>
+            <para>If <i>lpName</i> is <b>NULL</b>, the job is created without a name. If <i>lpName</i> matches the name of an existing event, semaphore, mutex, waitable timer, or file-mapping object, the function fails and the <a href="https://docs.microsoft.com/windows/desktop/api/errhandlingapi/nf-errhandlingapi-getlasterror">GetLastError</a> function returns <b>ERROR_INVALID_HANDLE</b>. This occurs because these objects share the same namespace. The object can be created in a private namespace. For more information, see <a href="https://docs.microsoft.com/windows/desktop/Sync/object-namespaces">Object Namespaces</a>. <b>Terminal Services:  </b>The name can have a "Global\\" or "Local\\" prefix to explicitly create the object in the global or session namespace. The remainder of the name can contain any character except the backslash character (\\). For more information, see <a href="https://docs.microsoft.com/windows/desktop/TermServ/kernel-object-namespaces">Kernel Object Namespaces</a>.</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api/jobapi2/nf-jobapi2-createjobobjectw#parameters">Read more on docs.microsoft.com</see>.</para>
+            </param>
+            <returns>
+            <para>If the function succeeds, the return value is a handle to the job object. The handle has the <b>JOB_OBJECT_ALL_ACCESS</b> access right. If the object existed before the function call, the function returns a handle to the existing job object and <a href="https://docs.microsoft.com/windows/desktop/api/errhandlingapi/nf-errhandlingapi-getlasterror">GetLastError</a> returns <b>ERROR_ALREADY_EXISTS</b>. If the function fails, the return value is NULL. To get extended error information, call <a href="https://docs.microsoft.com/windows/desktop/api/errhandlingapi/nf-errhandlingapi-getlasterror">GetLastError</a>.</para>
+            </returns>
+            <remarks>
+            <para>When a job is created, its accounting information is initialized to zero, all limits are inactive, and there are no associated processes. To assign a process to  a job object, use the <a href="https://docs.microsoft.com/windows/desktop/api/jobapi2/nf-jobapi2-assignprocesstojobobject">AssignProcessToJobObject</a> function. To set limits for a job, use the <a href="https://docs.microsoft.com/windows/desktop/api/jobapi2/nf-jobapi2-setinformationjobobject">SetInformationJobObject</a> function. To query accounting information, use the <a href="https://docs.microsoft.com/windows/desktop/api/jobapi2/nf-jobapi2-queryinformationjobobject">QueryInformationJobObject</a> function. All processes associated with a job must run in the same session. A job is associated with the session of the first process to be assigned to the job. <b>Windows Server 2003 and Windows XP:  </b>A job is associated with the session of the  process that created it. To close a job object handle, use the <a href="https://docs.microsoft.com/windows/desktop/api/handleapi/nf-handleapi-closehandle">CloseHandle</a> function. The job is destroyed when its last handle has been closed and all associated processes have exited. However, if the job has the <b>JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE</b> flag specified, closing the last job object handle terminates all associated processes and then destroys the job object itself. To compile an application that uses this function, define <b>_WIN32_WINNT</b> as 0x0500 or later. For more information, see <a href="https://docs.microsoft.com/windows/desktop/WinProg/using-the-windows-headers">Using the Windows Headers</a>.</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api/jobapi2/nf-jobapi2-createjobobjectw#">Read more on docs.microsoft.com</see>.</para>
+            </remarks>
+        </member>
+        <member name="M:Windows.Win32.PInvoke.SetInformationJobObject(System.Runtime.InteropServices.SafeHandle,Windows.Win32.System.JobObjects.JOBOBJECTINFOCLASS,System.Void*,System.UInt32)">
+            <inheritdoc cref="M:Windows.Win32.PInvoke.SetInformationJobObject(Windows.Win32.Foundation.HANDLE,Windows.Win32.System.JobObjects.JOBOBJECTINFOCLASS,System.Void*,System.UInt32)"/>
+        </member>
+        <member name="M:Windows.Win32.PInvoke.SetInformationJobObject(Windows.Win32.Foundation.HANDLE,Windows.Win32.System.JobObjects.JOBOBJECTINFOCLASS,System.Void*,System.UInt32)">
+            <summary>Sets limits for a job object.</summary>
+            <param name="hJob">
+            <para>A handle to the job whose limits are being set. The <a href="https://docs.microsoft.com/windows/desktop/api/winbase/nf-winbase-createjobobjecta">CreateJobObject</a> or <a href="https://docs.microsoft.com/windows/desktop/api/winbase/nf-winbase-openjobobjecta">OpenJobObject</a> function returns this handle. The handle must have the <b>JOB_OBJECT_SET_ATTRIBUTES</b> access right. For more information, see <a href="https://docs.microsoft.com/windows/desktop/ProcThread/job-object-security-and-access-rights">Job Object Security and Access Rights</a>.</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api/jobapi2/nf-jobapi2-setinformationjobobject#parameters">Read more on docs.microsoft.com</see>.</para>
+            </param>
+            <param name="JobObjectInformationClass"></param>
+            <param name="lpJobObjectInformation">The limits or job state to be set for the job. The format of this data depends on the value of <i>JobObjectInfoClass</i>.</param>
+            <param name="cbJobObjectInformationLength">The size of the job information being set, in bytes.</param>
+            <returns>
+            <para>If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call <a href="https://docs.microsoft.com/windows/desktop/api/errhandlingapi/nf-errhandlingapi-getlasterror">GetLastError</a>.</para>
+            </returns>
+            <remarks>
+            <para>Use the <b>SetInformationJobObject</b> function to set several limits in a single call. To establish the limits one at a time or change a subset of the limits, call the <a href="https://docs.microsoft.com/windows/desktop/api/jobapi2/nf-jobapi2-queryinformationjobobject">QueryInformationJobObject</a> function to obtain the current limits, modify these limits, and then call <b>SetInformationJobObject</b>. You must set security limits individually for each process associated with a job object, rather than setting them for the job object itself. For information, see <a href="https://docs.microsoft.com/windows/desktop/ProcThread/process-security-and-access-rights">Process Security and Access Rights</a>. <b>Windows Server 2003 and Windows XP:  </b>Use the <b>SetInformationJobObject</b> function to set security limits for the job object. To compile an application that uses this function, define _WIN32_WINNT as 0x0500 or later. For more information, see <a href="https://docs.microsoft.com/windows/desktop/WinProg/using-the-windows-headers">Using the Windows Headers</a>.</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api/jobapi2/nf-jobapi2-setinformationjobobject#">Read more on docs.microsoft.com</see>.</para>
+            </remarks>
+        </member>
+        <member name="M:Windows.Win32.PInvoke.EnumChildWindows(Windows.Win32.Foundation.HWND,Windows.Win32.UI.WindowsAndMessaging.WNDENUMPROC,Windows.Win32.Foundation.LPARAM)">
+            <summary>Enumerates the child windows that belong to the specified parent window by passing the handle to each child window, in turn, to an application-defined callback function.</summary>
+            <param name="hWndParent">
+            <para>Type: <b>HWND</b> A handle to the parent window whose child windows are to be enumerated. If this parameter is <b>NULL</b>, this function is equivalent to <a href="https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-enumwindows">EnumWindows</a>.</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api/winuser/nf-winuser-enumchildwindows#parameters">Read more on docs.microsoft.com</see>.</para>
+            </param>
+            <param name="lpEnumFunc">
+            <para>Type: <b>WNDENUMPROC</b> A pointer to an application-defined callback function. For more information, see <a href="https://docs.microsoft.com/previous-versions/windows/desktop/legacy/ms633493(v=vs.85)">EnumChildProc</a>.</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api/winuser/nf-winuser-enumchildwindows#parameters">Read more on docs.microsoft.com</see>.</para>
+            </param>
+            <param name="lParam">
+            <para>Type: <b>LPARAM</b> An application-defined value to be passed to the callback function.</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api/winuser/nf-winuser-enumchildwindows#parameters">Read more on docs.microsoft.com</see>.</para>
+            </param>
+            <returns>
+            <para>Type: <b>BOOL</b> The return value is not used.</para>
+            </returns>
+            <remarks>
+            <para>If a child window has created child windows of its own, <b>EnumChildWindows</b> enumerates those windows as well. A child window that is moved or repositioned in the Z order during the enumeration process will be properly enumerated. The function does not enumerate a child window that is destroyed before being enumerated or that is created during the enumeration process.</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api/winuser/nf-winuser-enumchildwindows#">Read more on docs.microsoft.com</see>.</para>
+            </remarks>
+        </member>
+        <member name="M:Windows.Win32.PInvoke.GetClassName(Windows.Win32.Foundation.HWND,Windows.Win32.Foundation.PWSTR,System.Int32)">
+            <summary>Retrieves the name of the class to which the specified window belongs. (GetClassNameW)</summary>
+            <param name="hWnd">
+            <para>Type: <b>HWND</b> A handle to the window and, indirectly, the class to which the window belongs.</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api/winuser/nf-winuser-getclassnamew#parameters">Read more on docs.microsoft.com</see>.</para>
+            </param>
+            <param name="lpClassName">
+            <para>Type: <b>LPTSTR</b> The class name string.</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api/winuser/nf-winuser-getclassnamew#parameters">Read more on docs.microsoft.com</see>.</para>
+            </param>
+            <param name="nMaxCount">
+            <para>Type: <b>int</b> The length of the *lpClassName* buffer, in characters. The buffer must be large enough to include the terminating null character; otherwise, the class name string is truncated to `nMaxCount-1` characters.</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api/winuser/nf-winuser-getclassnamew#parameters">Read more on docs.microsoft.com</see>.</para>
+            </param>
+            <returns>
+            <para>Type: <b>int</b> If the function succeeds, the return value is the number of characters copied to the buffer, not including the terminating null character. If the function fails, the return value is zero. To get extended error information, call <a href="https://docs.microsoft.com/windows/desktop/api/errhandlingapi/nf-errhandlingapi-getlasterror">GetLastError</a>.</para>
+            </returns>
+            <remarks>
+            <para>> [!NOTE] > The winuser.h header defines GetClassName as an alias which automatically selects the ANSI or Unicode version of this function based on the definition of the UNICODE preprocessor constant. Mixing usage of the encoding-neutral alias with code that not encoding-neutral can lead to mismatches that result in compilation or runtime errors. For more information, see [Conventions for Function Prototypes](/windows/win32/intl/conventions-for-function-prototypes).</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api/winuser/nf-winuser-getclassnamew#">Read more on docs.microsoft.com</see>.</para>
+            </remarks>
+        </member>
+        <member name="M:Windows.Win32.PInvoke.SendMessage(Windows.Win32.Foundation.HWND,System.UInt32,Windows.Win32.Foundation.WPARAM,Windows.Win32.Foundation.LPARAM)">
+            <summary>Sends the specified message to a window or windows. The SendMessage function calls the window procedure for the specified window and does not return until the window procedure has processed the message. (SendMessageW)</summary>
+            <param name="hWnd">
+            <para>Type: <b>HWND</b> A handle to the window whose window procedure will receive the message. If this parameter is <b>HWND_BROADCAST</b> ((HWND)0xffff), the message is sent to all top-level windows in the system, including disabled or invisible unowned windows, overlapped windows, and pop-up windows; but the message is not sent to child windows. Message sending is subject to UIPI. The thread of a process can send messages only to message queues of threads in processes of lesser or equal integrity level.</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api/winuser/nf-winuser-sendmessagew#parameters">Read more on docs.microsoft.com</see>.</para>
+            </param>
+            <param name="Msg">
+            <para>Type: <b>UINT</b> The message to be sent. For lists of the system-provided messages, see <a href="https://docs.microsoft.com/windows/desktop/winmsg/about-messages-and-message-queues">System-Defined Messages</a>.</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api/winuser/nf-winuser-sendmessagew#parameters">Read more on docs.microsoft.com</see>.</para>
+            </param>
+            <param name="wParam">
+            <para>Type: <b>WPARAM</b> Additional message-specific information.</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api/winuser/nf-winuser-sendmessagew#parameters">Read more on docs.microsoft.com</see>.</para>
+            </param>
+            <param name="lParam">
+            <para>Type: <b>LPARAM</b> Additional message-specific information.</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api/winuser/nf-winuser-sendmessagew#parameters">Read more on docs.microsoft.com</see>.</para>
+            </param>
+            <returns>
+            <para>Type: <b>LRESULT</b> The return value specifies the result of the message processing; it depends on the message sent.</para>
+            </returns>
+            <remarks>
+            <para>When a message is blocked by UIPI the last error, retrieved with <a href="https://docs.microsoft.com/windows/desktop/api/errhandlingapi/nf-errhandlingapi-getlasterror">GetLastError</a>, is set to 5 (access denied). Applications that need to communicate using <b>HWND_BROADCAST</b> should use the <a href="https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-registerwindowmessagea">RegisterWindowMessage</a> function to obtain a unique message for inter-application communication. The system only does marshalling for system messages (those in the range 0 to (<a href="https://docs.microsoft.com/windows/desktop/winmsg/wm-user">WM_USER</a>-1)). To send other messages (those &gt;= <b>WM_USER</b>) to another process, you must do custom marshalling. If the specified window was created by the calling thread, the window procedure is called immediately as a subroutine. If the specified window was created by a different thread, the system switches to that thread and calls the appropriate window procedure. Messages sent between threads are processed only when the receiving thread executes message retrieval code. The sending thread is blocked until the receiving thread processes the message. However, the sending thread will process incoming nonqueued messages while waiting for its message to be processed. To prevent this, use <a href="https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-sendmessagetimeouta">SendMessageTimeout</a> with SMTO_BLOCK set. For more information on nonqueued messages, see <a href="https://docs.microsoft.com/windows/desktop/winmsg/about-messages-and-message-queues">Nonqueued Messages</a>. An accessibility application can use <b>SendMessage</b> to send <a href="https://docs.microsoft.com/windows/desktop/inputdev/wm-appcommand">WM_APPCOMMAND</a> messages  to the shell to launch applications. This  functionality is not guaranteed to work for other types of applications.</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api/winuser/nf-winuser-sendmessagew#">Read more on docs.microsoft.com</see>.</para>
+            </remarks>
+        </member>
+        <member name="T:Windows.Win32.Security.SECURITY_ATTRIBUTES">
+            <summary>The SECURITY_ATTRIBUTES structure contains the security descriptor for an object and specifies whether the handle retrieved by specifying this structure is inheritable.</summary>
+            <remarks></remarks>
+        </member>
+        <member name="F:Windows.Win32.Security.SECURITY_ATTRIBUTES.nLength">
+            <summary>The size, in bytes, of this structure. Set this value to the size of the **SECURITY\_ATTRIBUTES** structure.</summary>
+        </member>
+        <member name="F:Windows.Win32.Security.SECURITY_ATTRIBUTES.lpSecurityDescriptor">
+            <summary>
+            <para>A pointer to a [**SECURITY\_DESCRIPTOR**](../winnt/ns-winnt-security_descriptor.md) structure that controls access to the object. If the value of this member is **NULL**, the object is assigned the default security descriptor associated with the [*access token*](/windows/win32/secauthz/access-tokens) of the calling process. This is not the same as granting access to everyone by assigning a **NULL** [*discretionary access control list*](/windows/win32/secauthz/dacls-and-aces) (DACL). By default, the default DACL in the access token of a process allows access only to the user represented by the access token. For information about creating a security descriptor, see [Creating a Security Descriptor](/windows/win32/secauthz/creating-a-security-descriptor-for-a-new-object-in-c--).</para>
+            <para><see href="https://docs.microsoft.com/windows/win32/api/wtypesbase/ns-wtypesbase-security_attributes#members">Read more on docs.microsoft.com</see>.</para>
+            </summary>
+        </member>
+        <member name="F:Windows.Win32.Security.SECURITY_ATTRIBUTES.bInheritHandle">
+            <summary>A Boolean value that specifies whether the returned handle is inherited when a new process is created. If this member is **TRUE**, the new process inherits the handle.</summary>
+        </member>
+    </members>
+</doc>

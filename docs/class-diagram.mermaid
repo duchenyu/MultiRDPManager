@@ -1,0 +1,202 @@
+%% ── 类定义 ──
+
+classDiagram
+    %% ── 枚举 ──
+    class ConnectionState {
+        <<enumeration>>
+        Disconnected
+        Connecting
+        Connected
+        Disconnecting
+        Error
+    }
+
+    class BroadcastMode {
+        <<enumeration>>
+        Disabled
+        All
+        SelectedTab
+    }
+
+    class FreeRdpStatus {
+        <<enumeration>>
+        OK = 0
+        ErrorGeneral = -1
+        ErrorConnect = -2
+        ErrorDisconnect = -3
+        ErrorTLSCert = -4
+        ErrorAuth = -5
+        ErrorTimeout = -6
+    }
+
+    class MouseEventFlags {
+        <<enumeration>>
+        Move = 0x0800
+        Down = 0x8000
+        Button1 = 0x1000
+        Button2 = 0x2000
+        Button3 = 0x4000
+        Wheel = 0x0200
+        HWheel = 0x0400
+    }
+
+    class KeyboardEventFlags {
+        <<enumeration>>
+        Extended = 0x0100
+        Extended1 = 0x0200
+        Down = 0x4000
+        Release = 0x8000
+    }
+
+    %% ── 模型 ──
+    class RdpServerEntry {
+        +string Id
+        +string Name
+        +string Host
+        +int Port
+        +string Username
+        +SecureString Password
+        +string Domain
+        +int DesktopWidth
+        +int DesktopHeight
+        +ConnectionState State
+        +string GetDisplayName()
+    }
+
+    class RdpSessionEventArgs {
+        +string SessionId
+        +string ServerName
+        +ConnectionState State
+        +string ErrorMessage
+    }
+
+    class MouseEventData {
+        +MouseEventFlags Flags
+        +int X
+        +int Y
+    }
+
+    class KeyboardEventData {
+        +KeyboardEventFlags Flags
+        +byte ScanCode
+    }
+
+    class ScrollEventData {
+        +int Delta
+        +bool IsHorizontal
+    }
+
+    %% ── 接口 ──
+    class IRdpSession {
+        <<interface>>
+        +string Id
+        +string ServerName
+        +ConnectionState State
+        +WriteableBitmap FrameBuffer
+        +event EventHandler~RdpSessionEventArgs~ StateChanged
+        +event EventHandler~RdpSessionEventArgs~ FrameUpdated
+        +Task ConnectAsync(RdpServerEntry server)
+        +Task DisconnectAsync()
+        +void SendMouseEvent(MouseEventFlags flags, int x, int y)
+        +void SendKeyboardEvent(KeyboardEventFlags flags, byte scanCode)
+        +void SendSynchronizeEvent()
+    }
+
+    class IRdpConnectionManager {
+        <<interface>>
+        +IReadOnlyDictionary~string, IRdpSession~ Sessions
+        +BroadcastMode CurrentBroadcastMode
+        +IRdpSession CreateSession(RdpServerEntry server)
+        +bool RemoveSession(string sessionId)
+        +Task ConnectSessionAsync(string sessionId)
+        +Task DisconnectSessionAsync(string sessionId)
+        +Task DisconnectAllAsync()
+        +void BroadcastMouseEvent(MouseEventFlags flags, int x, int y)
+        +void BroadcastKeyboardEvent(KeyboardEventFlags flags, byte scanCode)
+        +event EventHandler~RdpSessionEventArgs~ SessionCreated
+        +event EventHandler~RdpSessionEventArgs~ SessionRemoved
+    }
+
+    class IInputBroadcastService {
+        <<interface>>
+        +BroadcastMode Mode
+        +HashSet~string~ TargetSessionIds
+        +void RouteMouseEvent(int displayX, int displayY, MouseEventData data)
+        +void RouteKeyboardEvent(KeyboardEventData data)
+        +void RouteScrollEvent(ScrollEventData data)
+    }
+
+    %% ── 实现类 ──
+    class RdpSession {
+        -string _sessionId
+        -IntPtr _nativeHandle
+        -Thread _workerThread
+        -WriteableBitmap _frameBuffer
+        -bool _isRunning
+        -int _width
+        -int _height
+        -int _stride
+        -byte[] _dirtyBuffer
+        +string Id
+        +string ServerName
+        +ConnectionState State
+        +WriteableBitmap FrameBuffer
+        +event EventHandler~RdpSessionEventArgs~ StateChanged
+        +event EventHandler~RdpSessionEventArgs~ FrameUpdated
+        +Task ConnectAsync(RdpServerEntry server)
+        +Task DisconnectAsync()
+        +void SendMouseEvent(MouseEventFlags flags, int x, int y)
+        +void SendKeyboardEvent(KeyboardEventFlags flags, byte scanCode)
+        +void SendSynchronizeEvent()
+        -void WorkerThreadLoop()
+        -void ProcessNativeCallbacks()
+        -void UpdateFrameBuffer()
+        -void RaiseStateChanged(ConnectionState newState)
+        -void RaiseFrameUpdated()
+    }
+
+    class RdpConnectionManager {
+        -Dictionary~string, RdpSession~ _sessions
+        -BroadcastMode _broadcastMode
+        -InputBroadcastService _inputService
+        -object _lockObj
+        +IReadOnlyDictionary~string, IRdpSession~ Sessions
+        +BroadcastMode CurrentBroadcastMode
+        +IRdpSession CreateSession(RdpServerEntry server)
+        +bool RemoveSession(string sessionId)
+        +Task ConnectSessionAsync(string sessionId)
+        +Task DisconnectSessionAsync(string sessionId)
+        +Task DisconnectAllAsync()
+        +void BroadcastMouseEvent(MouseEventFlags flags, int x, int y)
+        +void BroadcastKeyboardEvent(KeyboardEventFlags flags, byte scanCode)
+        +event EventHandler~RdpSessionEventArgs~ SessionCreated
+        +event EventHandler~RdpSessionEventArgs~ SessionRemoved
+    }
+
+    class InputBroadcastService {
+        -RdpConnectionManager _manager
+        -Dictionary~string, NormalizedRect~ _clientRects
+        +BroadcastMode Mode
+        +HashSet~string~ TargetSessionIds
+        +void RouteMouseEvent(int displayX, int displayY, MouseEventData data)
+        +void RouteKeyboardEvent(KeyboardEventData data)
+        +void RouteScrollEvent(ScrollEventData data)
+        -int NormalizeCoordinate(int coord, int localSize, int remoteSize)
+    }
+
+    %% ── 关系 ──
+    RdpSession ..|> IRdpSession
+    RdpConnectionManager ..|> IRdpConnectionManager
+    InputBroadcastService ..|> IInputBroadcastService
+    RdpConnectionManager o-- "many" RdpSession : manages
+    RdpConnectionManager o-- InputBroadcastService : uses
+    InputBroadcastService --> RdpConnectionManager : references
+    InputBroadcastService --> MouseEventData
+    InputBroadcastService --> KeyboardEventData
+    InputBroadcastService --> ScrollEventData
+    RdpSession --> ConnectionState
+    RdpSession --> RdpServerEntry
+    RdpSession ..> MouseEventFlags
+    RdpSession ..> KeyboardEventFlags
+    RdpConnectionManager ..> BroadcastMode
+    RdpConnectionManager ..> RdpSessionEventArgs : raises

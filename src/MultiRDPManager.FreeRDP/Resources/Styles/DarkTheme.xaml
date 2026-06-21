@@ -1,0 +1,538 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ════════════════════════════════════════════════════ -->
+    <!--  MultiRDPManager UI Redesign · Design Token System   -->
+    <!--  Design Philosophy: "Precision Control"              -->
+    <!--  ════════════════════════════════════════════════════ -->
+
+    <!-- ──── 1. Color Palette ──── -->
+    <!-- Backgrounds & Surfaces -->
+    <Color x:Key="Color_Background">#1a1b26</Color>
+    <Color x:Key="Color_Surface">#24283b</Color>
+    <Color x:Key="Color_SurfaceHover">#2a2e42</Color>
+    <Color x:Key="Color_SurfaceActive">#1f2335</Color>
+    <Color x:Key="Color_Toolbar">#1f2335</Color>
+    <Color x:Key="Color_Elevated">#2f3347</Color>
+    <Color x:Key="Color_Overlay">#0a0b10</Color>
+
+    <!-- Borders & Dividers -->
+    <Color x:Key="Color_Border">#3b4261</Color>
+    <Color x:Key="Color_BorderLight">#2f3450</Color>
+
+    <!-- Brand / Accent -->
+    <Color x:Key="Color_Accent">#7aa2f7</Color>
+    <Color x:Key="Color_AccentHover">#89b4fa</Color>
+    <Color x:Key="Color_AccentPressed">#5d8fe8</Color>
+    <Color x:Key="Color_AccentBg">#2a3a6a</Color>
+
+    <!-- Semantic -->
+    <Color x:Key="Color_Success">#9ece6a</Color>
+    <Color x:Key="Color_SuccessBg">#1e3a1e</Color>
+    <Color x:Key="Color_Warning">#e0af68</Color>
+    <Color x:Key="Color_WarningBg">#3a2e1e</Color>
+    <Color x:Key="Color_Error">#f7768e</Color>
+    <Color x:Key="Color_ErrorBg">#3a1e2a</Color>
+    <Color x:Key="Color_Info">#7dcfff</Color>
+    <Color x:Key="Color_InfoBg">#1e2e3a</Color>
+
+    <!-- Text -->
+    <Color x:Key="Color_TextPrimary">#c0caf5</Color>
+    <Color x:Key="Color_TextSecondary">#7982b0</Color>
+    <Color x:Key="Color_TextTertiary">#565f89</Color>
+    <Color x:Key="Color_TextOnAccent">#1a1b26</Color>
+    <Color x:Key="Color_TextPlaceholder">#565f89</Color>
+
+    <!-- Group Control -->
+    <Color x:Key="Color_GroupControlBorder">#f7768e</Color>
+    <Color x:Key="Color_GroupControlBg">#3a1e2a</Color>
+
+    <!-- ──── 2. Brushes ──── -->
+    <SolidColorBrush x:Key="Brush_Background" Color="{StaticResource Color_Background}" />
+    <SolidColorBrush x:Key="Brush_Surface" Color="{StaticResource Color_Surface}" />
+    <SolidColorBrush x:Key="Brush_SurfaceHover" Color="{StaticResource Color_SurfaceHover}" />
+    <SolidColorBrush x:Key="Brush_SurfaceActive" Color="{StaticResource Color_SurfaceActive}" />
+    <SolidColorBrush x:Key="Brush_ToolbarBackground" Color="{StaticResource Color_Toolbar}" />
+    <SolidColorBrush x:Key="Brush_Elevated" Color="{StaticResource Color_Elevated}" />
+    <SolidColorBrush x:Key="Brush_Overlay" Color="{StaticResource Color_Overlay}" />
+    <SolidColorBrush x:Key="Brush_Border" Color="{StaticResource Color_Border}" />
+    <SolidColorBrush x:Key="Brush_BorderLight" Color="{StaticResource Color_BorderLight}" />
+    <SolidColorBrush x:Key="Brush_Accent" Color="{StaticResource Color_Accent}" />
+    <SolidColorBrush x:Key="Brush_AccentHover" Color="{StaticResource Color_AccentHover}" />
+    <SolidColorBrush x:Key="Brush_AccentPressed" Color="{StaticResource Color_AccentPressed}" />
+    <SolidColorBrush x:Key="Brush_AccentBg" Color="{StaticResource Color_AccentBg}" />
+    <SolidColorBrush x:Key="Brush_Success" Color="{StaticResource Color_Success}" />
+    <SolidColorBrush x:Key="Brush_SuccessBg" Color="{StaticResource Color_SuccessBg}" />
+    <SolidColorBrush x:Key="Brush_Warning" Color="{StaticResource Color_Warning}" />
+    <SolidColorBrush x:Key="Brush_Error" Color="{StaticResource Color_Error}" />
+    <SolidColorBrush x:Key="Brush_ErrorBg" Color="{StaticResource Color_ErrorBg}" />
+    <SolidColorBrush x:Key="Brush_Info" Color="{StaticResource Color_Info}" />
+    <SolidColorBrush x:Key="Brush_InfoBg" Color="{StaticResource Color_InfoBg}" />
+    <SolidColorBrush x:Key="Brush_TextPrimary" Color="{StaticResource Color_TextPrimary}" />
+    <SolidColorBrush x:Key="Brush_TextSecondary" Color="{StaticResource Color_TextSecondary}" />
+    <SolidColorBrush x:Key="Brush_TextTertiary" Color="{StaticResource Color_TextTertiary}" />
+    <SolidColorBrush x:Key="Brush_TextOnAccent" Color="{StaticResource Color_TextOnAccent}" />
+    <SolidColorBrush x:Key="Brush_TextPlaceholder" Color="{StaticResource Color_TextPlaceholder}" />
+    <SolidColorBrush x:Key="Brush_GroupControlBorder" Color="{StaticResource Color_GroupControlBorder}" />
+    <SolidColorBrush x:Key="Brush_GroupControlBg" Color="{StaticResource Color_GroupControlBg}" />
+
+    <!-- Legacy aliases (for backward compat with existing bindings) -->
+    <SolidColorBrush x:Key="Brush_CardBackground" Color="{StaticResource Color_Surface}" />
+    <SolidColorBrush x:Key="Brush_Divider" Color="{StaticResource Color_Border}" />
+    <SolidColorBrush x:Key="Brush_SelectedHighlight" Color="{StaticResource Color_Accent}" />
+    <SolidColorBrush x:Key="Brush_Online" Color="{StaticResource Color_Success}" />
+    <SolidColorBrush x:Key="Brush_Offline" Color="{StaticResource Color_TextSecondary}" />
+    <SolidColorBrush x:Key="Brush_HoverBackground" Color="{StaticResource Color_SurfaceHover}" />
+    <SolidColorBrush x:Key="Brush_PressedBackground" Color="{StaticResource Color_SurfaceActive}" />
+    <SolidColorBrush x:Key="Brush_ThumbnailBackground" Color="{StaticResource Color_Background}" />
+
+    <!-- ──── 3. Typography ──── -->
+    <FontFamily x:Key="Font_Normal">Segoe UI Variable, Segoe UI, Microsoft YaHei, sans-serif</FontFamily>
+    <FontFamily x:Key="Font_Monospace">Cascadia Code, Consolas, monospace</FontFamily>
+
+    <!-- ──── 4. Default Styles (Global) ──── -->
+    <Style TargetType="Window">
+        <Setter Property="Background" Value="{StaticResource Brush_Background}" />
+        <Setter Property="Foreground" Value="{StaticResource Brush_TextPrimary}" />
+        <Setter Property="FontFamily" Value="{StaticResource Font_Normal}" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
+        <Setter Property="TextOptions.TextRenderingMode" Value="ClearType" />
+    </Style>
+
+    <Style TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource Brush_TextPrimary}" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="TextWrapping" Value="NoWrap" />
+    </Style>
+
+    <!-- ════════════════════════════════════════════════════ -->
+    <!--  MENU STYLES                                        -->
+    <!-- ════════════════════════════════════════════════════ -->
+    <Style TargetType="Menu">
+        <Setter Property="Background" Value="{StaticResource Brush_ToolbarBackground}" />
+        <Setter Property="Foreground" Value="{StaticResource Brush_TextPrimary}" />
+        <Setter Property="FontSize" Value="13" />
+    </Style>
+
+    <Style TargetType="MenuItem">
+        <Setter Property="Background" Value="{StaticResource Brush_Elevated}" />
+        <Setter Property="Foreground" Value="{StaticResource Brush_TextPrimary}" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="Padding" Value="8,4" />
+        <Style.Triggers>
+            <Trigger Property="IsHighlighted" Value="True">
+                <Setter Property="Background" Value="{StaticResource Brush_SurfaceHover}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="ContextMenu">
+        <Setter Property="Background" Value="{StaticResource Brush_Elevated}" />
+        <Setter Property="Foreground" Value="{StaticResource Brush_TextPrimary}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Brush_Border}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="HasDropShadow" Value="True" />
+    </Style>
+
+    <!-- ════════════════════════════════════════════════════ -->
+    <!--  TOOLBAR STYLES                                     -->
+    <!-- ════════════════════════════════════════════════════ -->
+    <Style x:Key="ToolbarButtonStyle" TargetType="Button">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{StaticResource Brush_TextPrimary}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Height" Value="32" />
+        <Setter Property="MinWidth" Value="36" />
+        <Setter Property="Padding" Value="8,4" />
+        <Setter Property="Margin" Value="2,0" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontWeight" Value="Medium" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="4"
+                            Padding="{TemplateBinding Padding}"
+                            SnapsToDevicePixels="True">
+                        <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          RecognizesAccessKey="True" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{StaticResource Brush_SurfaceHover}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="{StaticResource Brush_SurfaceActive}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{StaticResource Brush_TextTertiary}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="IconToolbarButtonStyle" TargetType="Button" BasedOn="{StaticResource ToolbarButtonStyle}">
+        <Setter Property="Width" Value="32" />
+        <Setter Property="Height" Value="32" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="MinWidth" Value="32" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="ToolTipService.ShowOnDisabled" Value="True" />
+    </Style>
+
+    <Style x:Key="PrimaryActionButton" TargetType="Button" BasedOn="{StaticResource ToolbarButtonStyle}">
+        <Setter Property="Background" Value="{StaticResource Brush_Accent}" />
+        <Setter Property="Padding" Value="16,4" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Foreground" Value="{StaticResource Brush_TextOnAccent}" />
+        <Setter Property="Height" Value="32" />
+        <Setter Property="MinWidth" Value="80" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource Brush_AccentHover}" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{StaticResource Brush_AccentPressed}" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Background" Value="{StaticResource Brush_Border}" />
+                <Setter Property="Foreground" Value="{StaticResource Brush_TextTertiary}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="SecondaryActionButton" TargetType="Button" BasedOn="{StaticResource ToolbarButtonStyle}">
+        <Setter Property="Background" Value="{StaticResource Brush_Elevated}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Brush_Border}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Padding" Value="16,4" />
+        <Setter Property="Height" Value="32" />
+        <Setter Property="MinWidth" Value="80" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource Brush_SurfaceHover}" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{StaticResource Brush_SurfaceActive}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="DangerButton" TargetType="Button" BasedOn="{StaticResource ToolbarButtonStyle}">
+        <Setter Property="Background" Value="{StaticResource Brush_ErrorBg}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Brush_Error}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Padding" Value="16,4" />
+        <Setter Property="Foreground" Value="{StaticResource Brush_Error}" />
+        <Setter Property="Height" Value="32" />
+        <Setter Property="MinWidth" Value="80" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#4a2530" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="#2a1520" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- ════════════════════════════════════════════════════ -->
+    <!--  TEXTBOX STYLES                                     -->
+    <!-- ════════════════════════════════════════════════════ -->
+    <Style TargetType="TextBox">
+        <Setter Property="Background" Value="{StaticResource Brush_Background}" />
+        <Setter Property="Foreground" Value="{StaticResource Brush_TextPrimary}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Brush_Border}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Padding" Value="8,5" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="CaretBrush" Value="{StaticResource Brush_TextPrimary}" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="4"
+                            SnapsToDevicePixels="True">
+                        <ScrollViewer x:Name="PART_ContentHost"
+                                      Margin="{TemplateBinding Padding}"
+                                      Foreground="{TemplateBinding Foreground}" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter Property="BorderBrush" Value="{StaticResource Brush_Accent}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" Value="{StaticResource Brush_TextSecondary}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.5" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ──── PasswordBox ──── -->
+    <Style TargetType="PasswordBox">
+        <Setter Property="Background" Value="{StaticResource Brush_Background}" />
+        <Setter Property="Foreground" Value="{StaticResource Brush_TextPrimary}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Brush_Border}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Padding" Value="8,5" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="PasswordBox">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="4"
+                            SnapsToDevicePixels="True">
+                        <ScrollViewer x:Name="PART_ContentHost"
+                                      Margin="{TemplateBinding Padding}" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter Property="BorderBrush" Value="{StaticResource Brush_Accent}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" Value="{StaticResource Brush_TextSecondary}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ════════════════════════════════════════════════════ -->
+    <!--  LISTVIEW STYLES                                    -->
+    <!-- ════════════════════════════════════════════════════ -->
+    <Style TargetType="ListView">
+        <Setter Property="Background" Value="{StaticResource Brush_Background}" />
+        <Setter Property="Foreground" Value="{StaticResource Brush_TextPrimary}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+    </Style>
+
+    <Style TargetType="ListViewItem">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{StaticResource Brush_TextPrimary}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Padding" Value="6,4" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListViewItem">
+                    <Grid>
+                        <!-- 左侧选中指示条 -->
+                        <Rectangle x:Name="SelectionIndicator"
+                                   Width="3"
+                                   HorizontalAlignment="Left"
+                                   Fill="{StaticResource Brush_Accent}"
+                                   Visibility="Collapsed" />
+                        <Border x:Name="ItemBorder"
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="0"
+                                Padding="{TemplateBinding Padding}"
+                                SnapsToDevicePixels="True">
+                            <ContentPresenter HorizontalAlignment="Left"
+                                              VerticalAlignment="Center" />
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="{StaticResource Brush_AccentBg}" />
+                            <Setter TargetName="SelectionIndicator" Property="Visibility" Value="Visible" />
+                            <Setter Property="Foreground" Value="{StaticResource Brush_TextPrimary}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{StaticResource Brush_SurfaceHover}" />
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsSelected" Value="True" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" Value="{StaticResource Brush_AccentBg}" />
+                            <Setter TargetName="SelectionIndicator" Property="Visibility" Value="Visible" />
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ════════════════════════════════════════════════════ -->
+    <!--  LISTBOX STYLES (for SelectMasterDialog)            -->
+    <!-- ════════════════════════════════════════════════════ -->
+    <Style TargetType="ListBox">
+        <Setter Property="Background" Value="{StaticResource Brush_Background}" />
+        <Setter Property="Foreground" Value="{StaticResource Brush_TextPrimary}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Brush_Border}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+    </Style>
+
+    <Style x:Key="DialogListBoxItemStyle" TargetType="ListBoxItem">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{StaticResource Brush_TextPrimary}" />
+        <Setter Property="Padding" Value="8,6" />
+        <Setter Property="BorderThickness" Value="0,0,0,1" />
+        <Setter Property="BorderBrush" Value="{StaticResource Brush_BorderLight}" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Padding="{TemplateBinding Padding}"
+                            SnapsToDevicePixels="True">
+                        <RadioButton IsChecked="{Binding IsSelected, RelativeSource={RelativeSource TemplatedParent}}"
+                                     GroupName="DialogSelection"
+                                     Focusable="False"
+                                     Foreground="{TemplateBinding Foreground}">
+                            <RadioButton.Content>
+                                <ContentPresenter
+                                    Content="{TemplateBinding Content}"
+                                    ContentTemplate="{TemplateBinding ContentTemplate}" />
+                            </RadioButton.Content>
+                        </RadioButton>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{StaticResource Brush_SurfaceHover}" />
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="{StaticResource Brush_AccentBg}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ════════════════════════════════════════════════════ -->
+    <!--  COMBOBOX STYLES                                    -->
+    <!-- ════════════════════════════════════════════════════ -->
+    <Style TargetType="ComboBox">
+        <Setter Property="Background" Value="{StaticResource Brush_Surface}" />
+        <Setter Property="Foreground" Value="{StaticResource Brush_TextPrimary}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Brush_Border}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Padding" Value="8,5" />
+        <Setter Property="FontSize" Value="13" />
+    </Style>
+
+    <!-- ════════════════════════════════════════════════════ -->
+    <!--  STATUSBAR STYLES                                   -->
+    <!-- ════════════════════════════════════════════════════ -->
+    <Style TargetType="StatusBar">
+        <Setter Property="Background" Value="{StaticResource Brush_ToolbarBackground}" />
+        <Setter Property="Foreground" Value="{StaticResource Brush_TextPrimary}" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="BorderThickness" Value="0,1,0,0" />
+        <Setter Property="BorderBrush" Value="{StaticResource Brush_Border}" />
+    </Style>
+
+    <Style TargetType="StatusBarItem">
+        <Setter Property="Foreground" Value="{StaticResource Brush_TextPrimary}" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Padding" Value="6,0" />
+    </Style>
+
+    <!-- ════════════════════════════════════════════════════ -->
+    <!--  SCROLLBAR STYLES                                   -->
+    <!-- ════════════════════════════════════════════════════ -->
+    <Style TargetType="ScrollBar">
+        <Setter Property="Background" Value="{StaticResource Brush_Background}" />
+        <Setter Property="Foreground" Value="{StaticResource Brush_Border}" />
+        <Setter Property="Width" Value="8" />
+    </Style>
+
+    <!-- ════════════════════════════════════════════════════ -->
+    <!--  CHECKBOX STYLES                                    -->
+    <!-- ════════════════════════════════════════════════════ -->
+    <Style TargetType="CheckBox">
+        <Setter Property="Foreground" Value="{StaticResource Brush_TextPrimary}" />
+        <Setter Property="FontSize" Value="13" />
+    </Style>
+
+    <!-- ════════════════════════════════════════════════════ -->
+    <!--  SEPARATOR STYLES                                   -->
+    <!-- ════════════════════════════════════════════════════ -->
+    <Style TargetType="Separator">
+        <Setter Property="Background" Value="{StaticResource Brush_Border}" />
+        <Setter Property="Margin" Value="4,4" />
+        <Setter Property="Width" Value="1" />
+    </Style>
+
+    <Style x:Key="ToolBarSeparatorStyle" TargetType="Separator">
+        <Setter Property="Background" Value="{StaticResource Brush_Border}" />
+        <Setter Property="Margin" Value="4,4" />
+        <Setter Property="Width" Value="1" />
+    </Style>
+
+    <!-- ════════════════════════════════════════════════════ -->
+    <!--  TOOLBAR TITLE STYLE                                -->
+    <!-- ════════════════════════════════════════════════════ -->
+    <Style x:Key="PanelTitleStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="11" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Foreground">
+            <Setter.Value>
+                <SolidColorBrush Color="#9aa5ce" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ════════════════════════════════════════════════════ -->
+    <!--  CARD STYLES                                        -->
+    <!-- ════════════════════════════════════════════════════ -->
+    <Style x:Key="ThumbnailCardStyle" TargetType="Border">
+        <Setter Property="Background" Value="{StaticResource Brush_Surface}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Brush_Border}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="Padding" Value="10" />
+        <Setter Property="Margin" Value="6,4" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+    </Style>
+
+    <!-- ════════════════════════════════════════════════════ -->
+    <!--  DIALOG STYLES                                      -->
+    <!-- ════════════════════════════════════════════════════ -->
+    <Style x:Key="DialogTitleStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Margin" Value="0,0,0,16" />
+    </Style>
+
+    <Style x:Key="DialogFormRowStyle" TargetType="Grid">
+        <Setter Property="Margin" Value="0,0,0,10" />
+    </Style>
+
+    <Style x:Key="DialogLabelStyle" TargetType="TextBlock">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="FontSize" Value="13" />
+    </Style>
+
+</ResourceDictionary>
