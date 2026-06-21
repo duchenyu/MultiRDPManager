@@ -256,14 +256,14 @@ namespace MultiRDPManager.FreeRDP
 
             if (exists)
             {
-                ShowInfo($"服务器 {server.Name} 已经连接");
+                ShowInfo($"Server {server.Name} is already connected");
                 return;
             }
 
             try
             {
                 server.ConnectionStatus = ConnectionStatus.Connecting;
-                UpdateStatusBar($"正在连接到 {server.Name} ({server.IpAddress}:{server.Port})...");
+                UpdateStatusBar($"Connecting to {server.Name} ({server.IpAddress}:{server.Port})...");
 
                 // 创建FreeRdpControl（之后由独立的WindowsFormsHost承载）
                 var rdpControl = new FreeRdpControl
@@ -337,7 +337,7 @@ namespace MultiRDPManager.FreeRDP
             }
             catch (Exception ex)
             {
-                ShowError($"连接失败: {ex.Message}");
+                ShowError($"Connection failed: {ex.Message}");
                 HandleSessionError(server.Id);
             }
         }
@@ -380,7 +380,7 @@ namespace MultiRDPManager.FreeRDP
                 }
 
                 _viewModel?.RefreshStatistics();
-                UpdateStatusBar($"已连接到 {session.ServerName}");
+                UpdateStatusBar($"Connected to {session.ServerName}");
 
                 // 有连接成功且窗口可见时启动缩略图定时器
                 if (!_thumbnailTimer.IsEnabled && _sessions.Count > 0
@@ -405,7 +405,7 @@ namespace MultiRDPManager.FreeRDP
                     return;
                 }
 
-                CleanupSession(session.ServerId, "远程连接已断开");
+                CleanupSession(session.ServerId, "Remote connection disconnected");
             });
         }
 
@@ -439,13 +439,13 @@ namespace MultiRDPManager.FreeRDP
 
             if (_activePreviewSession == null) return;
 
-            System.Diagnostics.Debug.WriteLine($"窗口缩放完成: 分辨率 {_resolutionWidth}×{_resolutionHeight}");
-            UpdateStatusBar($"正在调整分辨率至 {_resolutionWidth}×{_resolutionHeight}...");
+            System.Diagnostics.Debug.WriteLine($"Resize complete: {_resolutionWidth}×{_resolutionHeight}");
+            UpdateStatusBar($"Adjusting resolution to {_resolutionWidth}×{_resolutionHeight}...");
 
             // 窗口缩放时不再重连 RDP，由 FreeRDP 的 SmartSizing 缩放适配
             //ReconnectWithNewResolution(_activePreviewSession);
 
-            UpdateStatusBar($"分辨率已调整至 {_resolutionWidth}×{_resolutionHeight}");
+            UpdateStatusBar($"Resolution adjusted to {_resolutionWidth}×{_resolutionHeight}");
         }
 
         /// <summary>
@@ -465,7 +465,7 @@ namespace MultiRDPManager.FreeRDP
 
             if (session == null) return;
 
-            UpdateStatusBar($"正在断开 {session.ServerName}...");
+            UpdateStatusBar($"Disconnecting {session.ServerName}...");
 
             try
             {
@@ -480,7 +480,7 @@ namespace MultiRDPManager.FreeRDP
             }
             finally
             {
-                CleanupSession(serverId, "已断开连接");
+                CleanupSession(serverId, "Disconnected");
             }
         }
 
@@ -548,7 +548,7 @@ namespace MultiRDPManager.FreeRDP
             {
                 MainPreviewContent.Children.Clear();
                 PlaceholderText.Visibility = Visibility.Visible;
-                MainPreviewTitle.Text = "远程桌面预览 — 请选择会话";
+                MainPreviewTitle.Text = "RDP Preview — Select a session";
                 _activePreviewSession = null;
             }
 
@@ -612,7 +612,7 @@ namespace MultiRDPManager.FreeRDP
             if (session != null)
             {
                 session.Status = ConnectionStatus.Error;
-                CleanupSession(serverId, "连接失败");
+                CleanupSession(serverId, "Connection failed");
             }
         }
 
@@ -634,7 +634,7 @@ namespace MultiRDPManager.FreeRDP
 
             _viewModel?.Servers.Remove(server);
             _viewModel?.RefreshStatistics();
-            UpdateStatusBar($"已删除服务器 {server.Name}");
+            UpdateStatusBar($"Deleted server {server.Name}");
         }
 
         #endregion
@@ -681,7 +681,7 @@ namespace MultiRDPManager.FreeRDP
             PlaceholderText.Visibility = Visibility.Collapsed;
 
             // 更新标题（远程分辨率 = 容器大小，由SmartReconnect自动适配）
-            MainPreviewTitle.Text = $"远程桌面 — {session.ServerName} ({session.IpAddress})";
+            MainPreviewTitle.Text = $"RDP — {session.ServerName} ({session.IpAddress})";
 
             _activePreviewSession = session;
 
@@ -725,7 +725,7 @@ namespace MultiRDPManager.FreeRDP
             var masterSession = _viewModel.FindSession(serverId);
             if (masterSession != null)
             {
-                UpdateStatusBar($"主控已切换到: {masterSession.ServerName}");
+                UpdateStatusBar($"Master switched to: {masterSession.ServerName}");
             }
 
             // 群控开启时更新钩子目标窗口
@@ -793,8 +793,8 @@ namespace MultiRDPManager.FreeRDP
             if (selectedSessions.Count == 0)
             {
                 System.Windows.MessageBox.Show(this,
-                    "请先在缩略面板勾选需要参与群控的服务器",
-                    "群控",
+                    "Please select servers to join group control in the thumbnail panel first",
+                    "Group Control",
                     MessageBoxButton.OK,
                     MessageBoxImage.Information);
                 return;
@@ -803,8 +803,8 @@ namespace MultiRDPManager.FreeRDP
             if (selectedSessions.Count < 2)
             {
                 System.Windows.MessageBox.Show(this,
-                    "群控至少需要两台已连接的服务器",
-                    "群控",
+                    "Group control requires at least 2 connected servers",
+                    "Group Control",
                     MessageBoxButton.OK,
                     MessageBoxImage.Information);
                 return;
@@ -866,13 +866,13 @@ namespace MultiRDPManager.FreeRDP
                 // wfreerdp 失焦后会设置 SuspendInput=TRUE 静默丢弃输入
                 _groupControlHook.WarmUpFocus();
 
-                UpdateStatusBar("群控已启动");
+                UpdateStatusBar("Group control started");
             }
             else
             {
                 // 停止钩子
                 _groupControlHook.Stop();
-                UpdateStatusBar("群控已关闭");
+                UpdateStatusBar("Group control stopped");
             }
         }
 
@@ -1005,7 +1005,7 @@ namespace MultiRDPManager.FreeRDP
             {
                 _viewModel.Servers.Add(dialog.ServerInfo);
                 _viewModel.RefreshStatistics();
-                UpdateStatusBar($"已添加服务器: {dialog.ServerInfo.Name}");
+                UpdateStatusBar($"Added server: {dialog.ServerInfo.Name}");
             }
         }
 
@@ -1026,8 +1026,8 @@ namespace MultiRDPManager.FreeRDP
             catch (Exception ex)
             {
                 System.Windows.MessageBox.Show(
-                    $"导入失败: {ex.GetType().Name}: {ex.Message}",
-                    "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                    $"Import failed: {ex.GetType().Name}: {ex.Message}",
+                    "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -1041,7 +1041,7 @@ namespace MultiRDPManager.FreeRDP
                     _viewModel.Servers.Add(server);
                 }
                 _viewModel.RefreshStatistics();
-                UpdateStatusBar($"已导入 {dialog.ImportedServers.Count} 台服务器");
+                UpdateStatusBar($"Imported {dialog.ImportedServers.Count} servers");
             }
         }
 
@@ -1054,11 +1054,11 @@ namespace MultiRDPManager.FreeRDP
             if (_viewModel?.SelectedServer != null)
             {
                 System.Windows.Clipboard.SetText(_viewModel.SelectedServer.IpAddress);
-                UpdateStatusBar($"已复制IP: {_viewModel.SelectedServer.IpAddress}");
+                UpdateStatusBar($"Copied IP: {_viewModel.SelectedServer.IpAddress}");
             }
             else
             {
-                ShowInfo("请先选择服务器");
+                ShowInfo("Please select a server first");
             }
         }
 
@@ -1083,7 +1083,7 @@ namespace MultiRDPManager.FreeRDP
                 WindowState = _previousWindowState;
             }
 
-            UpdateStatusBar(_isFullScreen ? "已进入全屏模式 (按Esc退出)" : "已退出全屏模式");
+            UpdateStatusBar(_isFullScreen ? "Fullscreen mode (press Esc to exit)" : "Exited fullscreen mode");
         }
 
         private void OnExitClick(object sender, RoutedEventArgs e)
@@ -1094,8 +1094,8 @@ namespace MultiRDPManager.FreeRDP
         private void OnAboutClick(object sender, RoutedEventArgs e)
         {
             System.Windows.MessageBox.Show(
-                "MultiRDPManager v2.0\n基于 RoyalApps.Community.FreeRdp.WinForms\n\n多Windows服务器远程管理器",
-                "关于 MultiRDPManager",
+                "MultiRDPManager v2.0\nBased on RoyalApps.Community.FreeRdp.WinForms\n\nMulti-server Windows Remote Desktop Manager",
+                "About MultiRDPManager",
                 MessageBoxButton.OK,
                 MessageBoxImage.Information);
         }
@@ -1116,7 +1116,7 @@ namespace MultiRDPManager.FreeRDP
         {
             System.Windows.MessageBox.Show(
                 message,
-                "MultiRDPManager - 错误",
+                "MultiRDPManager - Error",
                 MessageBoxButton.OK,
                 MessageBoxImage.Error);
         }

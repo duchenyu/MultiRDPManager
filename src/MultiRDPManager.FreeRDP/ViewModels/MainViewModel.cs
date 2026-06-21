@@ -15,7 +15,7 @@ namespace MultiRDPManager.FreeRDP.ViewModels
         private bool _isGroupControlActive;
         private int _onlineCount;
         private int _totalCount;
-        private string _statusBarText = "就绪";
+        private string _statusBarText = "Ready";
         private bool _canConnect = true;
         private string _searchText = string.Empty;
 
@@ -67,7 +67,7 @@ namespace MultiRDPManager.FreeRDP.ViewModels
         /// </summary>
         public string SelectedServerDisplay => SelectedServer != null
             ? $"{SelectedServer.Name} ({SelectedServer.IpAddress}:{SelectedServer.Port})"
-            : "(未选择)";
+            : "(None selected)";
 
         /// <summary>
         /// 是否启用群控模式
@@ -127,7 +127,7 @@ namespace MultiRDPManager.FreeRDP.ViewModels
         /// <summary>
         /// 群控状态文本
         /// </summary>
-        public string GroupControlStatusText => _isGroupControlActive ? "群控已开启" : "群控已关闭";
+        public string GroupControlStatusText => _isGroupControlActive ? "Group control active" : "Group control disabled";
 
         /// <summary>
         /// 是否能连接（防止并发操作）
@@ -270,11 +270,11 @@ namespace MultiRDPManager.FreeRDP.ViewModels
         {
             if (_isGroupControlActive)
             {
-                StatusBarText = $"群控模式已激活 | 在线: {OnlineCount}/{TotalCount}";
+                StatusBarText = $"Group control active | Online: {OnlineCount}/{TotalCount}";
             }
             else
             {
-                StatusBarText = $"就绪 | 在线: {OnlineCount}/{TotalCount}";
+                StatusBarText = $"Ready | Online: {OnlineCount}/{TotalCount}";
             }
         }
 

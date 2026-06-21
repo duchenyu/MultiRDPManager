@@ -24,14 +24,14 @@ namespace MultiRDPManager.FreeRDP.Views.Dialogs
             // 验证
             if (string.IsNullOrWhiteSpace(IpTextBox.Text))
             {
-                System.Windows.MessageBox.Show("请输入IP地址", "验证错误", MessageBoxButton.OK, MessageBoxImage.Warning);
+                System.Windows.MessageBox.Show("Please enter an IP address", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                 IpTextBox.Focus();
                 return;
             }
 
             if (!int.TryParse(PortTextBox.Text, out int port) || port < 1 || port > 65535)
             {
-                System.Windows.MessageBox.Show("请输入有效的端口号 (1-65535)", "验证错误", MessageBoxButton.OK, MessageBoxImage.Warning);
+                System.Windows.MessageBox.Show("Please enter a valid port number (1-65535)", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                 PortTextBox.Focus();
                 return;
             }

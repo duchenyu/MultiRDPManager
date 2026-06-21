@@ -50,8 +50,8 @@ namespace MultiRDPManager.FreeRDP.Views.Dialogs
             else
             {
                 System.Windows.MessageBox.Show(this,
-                    "请选择一台服务器作为主控窗口",
-                    "提示",
+                    "Please select a server as the master window",
+                    "Info",
                     MessageBoxButton.OK,
                     MessageBoxImage.Information);
             }

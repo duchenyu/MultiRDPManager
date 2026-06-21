@@ -31,9 +31,9 @@ namespace MultiRDPManager.FreeRDP.Views.Dialogs
             {
                 _parsedServers = null;
                 ImportButton.IsEnabled = false;
-                ImportButton.Content = "导入";
-                PreviewInfoText.Text = "预览：等待输入...";
-                ParseStatusText.Text = "粘贴CSV数据后自动解析...";
+                ImportButton.Content = "Import";
+                PreviewInfoText.Text = "Preview: Waiting for input...";
+                ParseStatusText.Text = "Paste CSV data for auto-parse...";
                 return;
             }
 
@@ -47,9 +47,9 @@ namespace MultiRDPManager.FreeRDP.Views.Dialogs
             {
                 _parsedServers = null;
                 ImportButton.IsEnabled = false;
-                ImportButton.Content = "导入";
-                PreviewInfoText.Text = "预览：解析失败";
-                ParseStatusText.Text = "解析错误: " + ex.Message;
+                ImportButton.Content = "Import";
+                PreviewInfoText.Text = "Preview: Parse failed";
+                ParseStatusText.Text = "Parse error: " + ex.Message;
                 return;
             }
             finally
@@ -60,16 +60,16 @@ namespace MultiRDPManager.FreeRDP.Views.Dialogs
             if (_parsedServers == null || _parsedServers.Count == 0)
             {
                 ImportButton.IsEnabled = false;
-                ImportButton.Content = "导入";
-                PreviewInfoText.Text = "预览：未能解析到有效数据";
-                ParseStatusText.Text = "请检查CSV格式是否正确 (IP, 用户名, 密码)";
+                ImportButton.Content = "Import";
+                PreviewInfoText.Text = "Preview: No valid data found";
+                ParseStatusText.Text = "Check CSV format (IP, Username, Password)";
                 return;
             }
 
             // 更新UI
             ImportButton.IsEnabled = true;
-            ImportButton.Content = $"导入 ({_parsedServers.Count} 台服务器)";
-            PreviewInfoText.Text = $"预览：已解析 {_parsedServers.Count} 台服务器（显示前3台）";
+            ImportButton.Content = $"Import ({_parsedServers.Count} servers)";
+            PreviewInfoText.Text = $"Preview: Parsed {_parsedServers.Count} servers (showing first 3)";
 
             // 显示前3条预览
             string previewLines = string.Join("\n",
@@ -79,7 +79,7 @@ namespace MultiRDPManager.FreeRDP.Views.Dialogs
                     return $"  - {name}  {s.IpAddress}:{s.Port}  {s.Username}";
                 }));
             string moreInfo = _parsedServers.Count > 3
-                ? $"\n  ... 还有 {_parsedServers.Count - 3} 台服务器"
+                ? $"\n  ... and {_parsedServers.Count - 3} more servers"
                 : "";
             ParseStatusText.Text = previewLines + moreInfo;
         }
@@ -189,16 +189,16 @@ namespace MultiRDPManager.FreeRDP.Views.Dialogs
             CsvTextBox.Clear();
             _parsedServers = null;
             ImportButton.IsEnabled = false;
-            ImportButton.Content = "导入";
-            PreviewInfoText.Text = "预览：等待输入...";
-            ParseStatusText.Text = "粘贴CSV数据后自动解析...";
+            ImportButton.Content = "Import";
+            PreviewInfoText.Text = "Preview: Waiting for input...";
+            ParseStatusText.Text = "Paste CSV data for auto-parse...";
         }
 
         private void OnImportClick(object sender, RoutedEventArgs e)
         {
             if (_parsedServers == null || _parsedServers.Count == 0)
             {
-                System.Windows.MessageBox.Show("没有可导入的服务器", "提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                System.Windows.MessageBox.Show("No servers to import", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
 

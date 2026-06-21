@@ -31,8 +31,8 @@ namespace MultiRDPManager.FreeRDP.Views.Dialogs
             if (!int.TryParse(WidthTextBox.Text.Trim(), out int width) || width < 640 || width > 7680)
             {
                 System.Windows.MessageBox.Show(
-                    "请输入有效的宽度值 (640-7680)",
-                    "验证错误",
+                    "Please enter a valid width value (640-7680)",
+                    "Validation Error",
                     MessageBoxButton.OK,
                     MessageBoxImage.Warning);
                 WidthTextBox.Focus();
@@ -44,8 +44,8 @@ namespace MultiRDPManager.FreeRDP.Views.Dialogs
             if (!int.TryParse(HeightTextBox.Text.Trim(), out int height) || height < 480 || height > 4320)
             {
                 System.Windows.MessageBox.Show(
-                    "请输入有效的高度值 (480-4320)",
-                    "验证错误",
+                    "Please enter a valid height value (480-4320)",
+                    "Validation Error",
                     MessageBoxButton.OK,
                     MessageBoxImage.Warning);
                 HeightTextBox.Focus();

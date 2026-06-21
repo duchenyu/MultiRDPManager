@@ -7,7 +7,7 @@
         xmlns:converters="clr-namespace:MultiRDPManager.FreeRDP.Converters"
         xmlns:wf="clr-namespace:System.Windows.Forms.Integration;assembly=WindowsFormsIntegration"
         mc:Ignorable="d"
-        Title="MultiRDPManager · 远程桌面管理器"
+        Title="MultiRDPManager · Remote Desktop Manager"
         Width="1600" Height="900"
         MinWidth="1024" MinHeight="600"
         WindowStartupLocation="CenterScreen"
@@ -37,24 +37,24 @@
               Foreground="{StaticResource Brush_TextPrimary}"
               FontSize="12"
               Padding="4,0">
-            <MenuItem Header="文件 (_F)">
-                <MenuItem Header="新建连接" Command="{Binding AddServerCommand}" />
-                <MenuItem Header="批量导入" Click="OnImportCsvClick" />
+            <MenuItem Header="File (_F)">
+                <MenuItem Header="New Connection" Command="{Binding AddServerCommand}" />
+                <MenuItem Header="Import from CSV" Click="OnImportCsvClick" />
                 <Separator />
-                <MenuItem Header="退出 (_X)" InputGestureText="Alt+F4" Click="OnExitClick" />
+                <MenuItem Header="Exit (_X)" InputGestureText="Alt+F4" Click="OnExitClick" />
             </MenuItem>
-            <MenuItem Header="操作 (_O)">
-                <MenuItem Header="连接选中" Command="{Binding ConnectCommand}" />
-                <MenuItem Header="断开选中" Command="{Binding DisconnectCommand}" />
+            <MenuItem Header="Actions (_O)">
+                <MenuItem Header="Connect Selected" Command="{Binding ConnectCommand}" />
+                <MenuItem Header="Disconnect Selected" Command="{Binding DisconnectCommand}" />
                 <Separator />
-                <MenuItem Header="全部连接" Command="{Binding ConnectAllCommand}" />
-                <MenuItem Header="全部断开" Command="{Binding DisconnectAllCommand}" />
+                <MenuItem Header="Connect All" Command="{Binding ConnectAllCommand}" />
+                <MenuItem Header="Disconnect All" Command="{Binding DisconnectAllCommand}" />
                 <Separator />
-                <MenuItem Header="群控模式" Command="{Binding ToggleGroupControlCommand}"
+                <MenuItem Header="Group Control" Command="{Binding ToggleGroupControlCommand}"
                           IsCheckable="True" IsChecked="{Binding IsGroupControlActive}" />
             </MenuItem>
-            <MenuItem Header="帮助 (_H)">
-                <MenuItem Header="关于 MultiRDPManager" Click="OnAboutClick" />
+            <MenuItem Header="Help (_H)">
+                <MenuItem Header="About MultiRDPManager" Click="OnAboutClick" />
             </MenuItem>
         </Menu>
 
@@ -69,11 +69,11 @@
                 <!-- 新建连接 -->
                 <Button Style="{StaticResource ToolbarButtonStyle}"
                         Command="{Binding AddServerCommand}"
-                        ToolTip="新建连接 (Ctrl+N)"
+                        ToolTip="New Connection (Ctrl+N)"
                         Padding="6,4">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                         <TextBlock Text="＋" FontSize="15" Foreground="{StaticResource Brush_TextPrimary}" Margin="0,0,4,0" VerticalAlignment="Center" />
-                        <TextBlock Text="新建" FontSize="12" FontWeight="Medium" VerticalAlignment="Center" />
+                        <TextBlock Text="New" FontSize="12" FontWeight="Medium" VerticalAlignment="Center" />
                     </StackPanel>
                 </Button>
 
@@ -81,11 +81,11 @@
                 <Button Style="{StaticResource ToolbarButtonStyle}"
                         Command="{Binding ImportCsvCommand}"
                         Click="OnImportCsvClick"
-                        ToolTip="批量导入服务器"
+                        ToolTip="Import servers from CSV"
                         Padding="6,4">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                         <TextBlock Text="⊞" FontSize="15" Foreground="{StaticResource Brush_TextPrimary}" Margin="0,0,4,0" VerticalAlignment="Center" />
-                        <TextBlock Text="导入" FontSize="12" FontWeight="Medium" VerticalAlignment="Center" />
+                        <TextBlock Text="Import" FontSize="12" FontWeight="Medium" VerticalAlignment="Center" />
                     </StackPanel>
                 </Button>
 
@@ -96,22 +96,22 @@
                 <!-- 连接选中 -->
                 <Button Style="{StaticResource ToolbarButtonStyle}"
                         Command="{Binding ConnectCommand}"
-                        ToolTip="连接选中的服务器"
+                        ToolTip="Connect selected server"
                         Padding="6,4">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                         <TextBlock Text="▶" FontSize="15" Foreground="{StaticResource Brush_Success}" Margin="0,0,4,0" VerticalAlignment="Center" />
-                        <TextBlock Text="连接" FontSize="12" FontWeight="Medium" VerticalAlignment="Center" />
+                        <TextBlock Text="Connect" FontSize="12" FontWeight="Medium" VerticalAlignment="Center" />
                     </StackPanel>
                 </Button>
 
                 <!-- 断开选中 -->
                 <Button Style="{StaticResource ToolbarButtonStyle}"
                         Command="{Binding DisconnectCommand}"
-                        ToolTip="断开选中的服务器"
+                        ToolTip="Disconnect selected server"
                         Padding="6,4">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                         <TextBlock Text="■" FontSize="15" Foreground="{StaticResource Brush_Error}" Margin="0,0,4,0" VerticalAlignment="Center" />
-                        <TextBlock Text="断开" FontSize="12" FontWeight="Medium" VerticalAlignment="Center" />
+                        <TextBlock Text="Disconnect" FontSize="12" FontWeight="Medium" VerticalAlignment="Center" />
                     </StackPanel>
                 </Button>
 
@@ -122,16 +122,16 @@
                 <!-- 全部连接 -->
                 <Button Style="{StaticResource ToolbarButtonStyle}"
                         Command="{Binding ConnectAllCommand}"
-                        ToolTip="连接所有服务器"
+                        ToolTip="Connect all servers"
                         Padding="8,4"
-                        Content="全部连接" />
+                        Content="Connect All" />
 
                 <!-- 全部断开 -->
                 <Button Style="{StaticResource ToolbarButtonStyle}"
                         Command="{Binding DisconnectAllCommand}"
-                        ToolTip="断开所有服务器"
+                        ToolTip="Disconnect all servers"
                         Padding="8,4"
-                        Content="全部断开" />
+                        Content="Disconnect All" />
 
                 <!-- 分隔 -->
                 <Border Width="1" Height="20" Margin="4,0"
@@ -140,18 +140,18 @@
                 <!-- 删除 -->
                 <Button Style="{StaticResource ToolbarButtonStyle}"
                         Command="{Binding DeleteServerCommand}"
-                        ToolTip="删除选中的服务器"
+                        ToolTip="Delete selected server"
                         Padding="8,4"
-                        Content="删除" />
+                        Content="Delete" />
 
                 <!-- 群控切换 -->
                 <Button x:Name="GroupControlButton"
                         Command="{Binding ToggleGroupControlCommand}"
-                        ToolTip="切换群控模式"
+                        ToolTip="Toggle group control mode"
                         Padding="10,4">
                     <Button.Style>
                         <Style TargetType="Button" BasedOn="{StaticResource ToolbarButtonStyle}">
-                            <Setter Property="Content" Value="群控" />
+                            <Setter Property="Content" Value="Group" />
                             <Setter Property="Foreground" Value="{StaticResource Brush_TextPrimary}" />
                             <Setter Property="Background" Value="Transparent" />
                             <Style.Triggers>
@@ -303,7 +303,7 @@
                             <!-- 当前选中服务器名称 -->
                             <TextBlock Grid.Column="1"
                                        x:Name="MainPreviewTitle"
-                                       Text="{Binding SelectedServerDisplay, FallbackValue='— 未选择'}"
+                                       Text="{Binding SelectedServerDisplay, FallbackValue='— None selected'}"
                                        FontSize="12"
                                        Foreground="{StaticResource Brush_TextSecondary}"
                                        VerticalAlignment="Center"
@@ -339,7 +339,7 @@
                                              Margin="0,0,6,0"
                                              VerticalAlignment="Center" />
                                     <TextBlock Grid.Column="1"
-                                               Text="群控模式"
+                                               Text="Group Control"
                                                FontSize="11"
                                                FontWeight="SemiBold"
                                                Foreground="{StaticResource Brush_GroupControlBorder}" />
@@ -366,7 +366,7 @@
                                            HorizontalAlignment="Center"
                                            Margin="0,0,0,8" />
                                 <TextBlock x:Name="PlaceholderText"
-                                           Text="选择服务器并连接以查看远程桌面"
+                                           Text="Select a server and connect to view remote desktop"
                                            Foreground="{StaticResource Brush_TextTertiary}"
                                            FontSize="13"
                                            HorizontalAlignment="Center"
@@ -436,7 +436,7 @@
                                            VerticalAlignment="Center" />
                                 <CheckBox Grid.Column="1"
                                           x:Name="SelectAllCheckBox"
-                                          Content="全选"
+                                          Content="Select All"
                                           FontSize="11"
                                           VerticalAlignment="Center"
                                           Foreground="{StaticResource Brush_TextSecondary}"
@@ -522,7 +522,7 @@
                                                             </Style.Triggers>
                                                         </Style>
                                                     </Border.Style>
-                                                    <TextBlock Text="主控"
+                                                    <TextBlock Text="Master"
                                                                FontSize="9"
                                                                FontWeight="Bold"
                                                                Foreground="{StaticResource Brush_Success}" />
@@ -537,7 +537,7 @@
                                                            VerticalAlignment="Center">
                                                     <TextBlock.Style>
                                                         <Style TargetType="TextBlock">
-                                                            <Setter Property="Text" Value="从" />
+                                                            <Setter Property="Text" Value="Slave" />
                                                             <Setter Property="Visibility" Value="Visible" />
                                                             <Style.Triggers>
                                                                 <DataTrigger Binding="{Binding IsMaster}" Value="True">
@@ -559,7 +559,7 @@
                                                 <!-- 群控勾选框 -->
                                                 <CheckBox Grid.Column="3"
                                                           IsChecked="{Binding IsGroupControlSelected}"
-                                                          ToolTip="勾选以加入群控"
+                                                          ToolTip="Check to join group control"
                                                           Margin="2,0,0,0" />
                                             </Grid>
 
@@ -625,9 +625,9 @@
             <!-- 当前服务器 -->
             <StatusBarItem Grid.Column="0" Padding="8,0">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="服务器: "
+                    <TextBlock Text="Server: "
                                Foreground="{StaticResource Brush_TextTertiary}" />
-                    <TextBlock Text="{Binding SelectedServerDisplay, FallbackValue='(未选择)'}"
+                    <TextBlock Text="{Binding SelectedServerDisplay, FallbackValue='(None selected)'}"
                                FontWeight="SemiBold"
                                Foreground="{StaticResource Brush_TextPrimary}" />
                 </StackPanel>
@@ -641,7 +641,7 @@
             <!-- 在线统计 -->
             <StatusBarItem Grid.Column="2" Padding="8,0">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="在线: "
+                    <TextBlock Text="Online: "
                                Foreground="{StaticResource Brush_TextTertiary}" />
                     <TextBlock Text="{Binding OnlineCount}"
                                FontWeight="SemiBold"
